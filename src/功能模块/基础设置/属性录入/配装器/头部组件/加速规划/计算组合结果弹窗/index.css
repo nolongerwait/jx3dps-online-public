@@ -1,0 +1,82 @@
+.haste-project-result-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.haste-project-result-header-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 4px
+}
+
+.haste-project-help-wrap {
+  padding-top: 12px;
+}
+
+.haste-project-help-radio {
+  margin-bottom: 12px;
+}
+
+.haste-project-result-content {
+  display: flex;
+  align-items: center;
+  margin: 0px -4px;
+  flex-wrap: wrap;
+}
+
+.haste-project-result-item {
+  display: flex;
+  align-items: center;
+  margin: 4px;
+}
+
+/* .haste-project-result-item + .haste-project-result-item {
+  margin-left: 12px;
+} */
+
+.haste-project-result-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 4px
+}
+
+.haste-project-result-value {
+  font-weight: 400;
+}
+
+.h-result-wucai {
+  color: #f90;
+}
+
+.h-result-fumo-zi {
+  color: #ff2dff;
+}
+
+.h-result-fumo-tz {
+  color: rgb(0, 128, 128);
+}
+
+.h-result-fumo-lan{
+  color: rgb(0, 126, 255)
+}
+
+.h-result-xiaoyao-zi {
+  color: #ff2dff;
+}
+
+.h-result-xiaoyao-lan {
+  color: rgb(0, 126, 255)
+}
+
+.h-result-jiu {
+  color: rgb(0, 128, 128);
+}
+
+.h-result-xiaoyao {
+  color: hsl(140, 60%, 40%);
+}
+
+.h-result-zhuangbei {
+  color: #F34242;
+}

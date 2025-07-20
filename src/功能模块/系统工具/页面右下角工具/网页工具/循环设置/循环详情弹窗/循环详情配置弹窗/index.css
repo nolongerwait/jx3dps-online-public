@@ -1,0 +1,22 @@
+.cycle-edit-title-tip {
+  margin-left: 8px;
+  color: rgba(3, 10, 26, 0.45);
+  cursor: pointer;
+}
+
+.cycle-skills-title {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.cycle-skills-collapse {
+  background: unset;
+}
+
+.cycle-skill-data-span {
+  margin-left: 12px;
+}
+
+.cycle-skill-data-label {
+  margin-right: 8px;
+}

@@ -1,0 +1,30 @@
+.cycle-setting-cycle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: 1px solid rgba(3, 10, 26, 0.12);
+  padding: 4px 8px;
+  border-radius: 8px;
+  line-height: 32px;
+}
+
+.cycle-setting-cycle-item-span {
+  margin: 0 12px 0 4px;
+}
+
+.cycle-setting-cycle-item-value {
+  font-weight: 500;
+  color: var(--ant-primary-color)
+}
+
+.cycle-setting-cycle-item-edit {
+  color: var(--ant-primary-color);
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.cycle-setting-cycle-item-delete {
+  color: #F34242;
+  cursor: pointer;
+}

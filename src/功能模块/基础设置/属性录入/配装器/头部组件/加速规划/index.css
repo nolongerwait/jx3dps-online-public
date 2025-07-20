@@ -1,0 +1,73 @@
+.haste-project-modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 24px;
+}
+
+.haste-project-wrap {
+  padding-top: 12px;
+}
+
+.haste-project-wrap .ant-form {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -24px;
+}
+
+.haste-project-wrap .ant-form .ant-form-item-label {
+  height: 32px;
+}
+
+.haste-project-wrap .ant-form .ant-form-item-label > label {
+  width: 100%;
+  display: flex;
+}
+
+.haste-project-wrap .ant-form .ant-form-item-label > label::after {
+  display: none;
+}
+
+.haste-project-input {
+  width: 100%;
+}
+
+.haste-project-target-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+
+.haste-project-target-operate {
+  margin-left: 12px;
+}
+
+.haste-project-operate-delete {
+  margin-left: 8px;
+  color: #ff0000
+}
+
+.haste-project-operate-delete:hover {
+  color: #ff4d4f
+}
+
+.haste-project-form-item-50 {
+  width: calc(50% - 24px);
+  margin-right: 24px;
+}
+
+.haste-project-form-item-65 {
+  width: calc(65% - 24px);
+  margin-right: 24px;
+}
+
+.haste-project-form-item-35 {
+  width: calc(35% - 24px);
+  margin-right: 24px;
+}
+
+.haste-project-form-item-100 {
+  width: calc(100% - 24px);
+}

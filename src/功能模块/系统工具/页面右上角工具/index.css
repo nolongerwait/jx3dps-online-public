@@ -1,0 +1,21 @@
+.right-top-tools {
+  position: fixed;
+  top: 0;
+  right: 24px;
+  margin: 0;
+  line-height: 36px;
+  font-size: 14px;
+  text-align: right;
+}
+
+.right-top-tools-btn {
+  transition: .2s;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 16px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.24);
+}
+
+.right-top-tools-btn:hover {
+  color: #ddd;
+}

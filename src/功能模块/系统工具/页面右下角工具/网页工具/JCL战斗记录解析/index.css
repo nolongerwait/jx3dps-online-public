@@ -1,0 +1,91 @@
+.tools-jcl-info {
+  margin-bottom: 12px;
+}
+
+.tools-jcl-params .ant-form-item-label {
+  font-size: 24px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.tools-jcl-params {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tools-jcl-params .ant-form-item {
+  width: 100%;
+}
+
+.tools-jcl-params .ant-form-item.tools-jcl-form-item {
+  width: calc(100% / 5);
+  padding-right: 24px;
+}
+
+.tools-jcl-params .ant-form-item.tools-jcl-form-item-2 {
+  width: calc(100% / 5);
+  padding-right: 24px;
+}
+
+.tools-jcl-params .ant-form-item.tools-jcl-form-item-3 {
+  width: calc(100% / 5);
+  padding-right: 24px;
+}
+
+.tools-jcl-params .ant-form-item.tools-jcl-form-item {
+  width: calc(100% / 5);
+  padding-right: 24px;
+}
+
+.tools-jcl-input {
+  height: 200px;
+  margin-bottom: 16px;
+}
+
+textarea.ant-input.tool-jcl-input-area {
+  height: 100px;
+}
+
+.tools-jcl-btns {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  justify-content: flex-end;
+}
+
+.tools-jcl-params-label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tools-jcl-params-numbers {
+  margin-left: 92px;
+}
+
+.tools-jcl-params-number {
+  margin-left: 12px;
+}
+
+.tools-jcl-btns .ant-btn + .ant-btn {
+  margin-left: 16px;
+}
+
+.tools-jcl-result {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
+
+.tools-jcl-form-label-3 {
+  width: 962px;
+  display: flex;
+  justify-content: space-between;
+}

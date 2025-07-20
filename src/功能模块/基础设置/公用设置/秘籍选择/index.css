@@ -1,0 +1,19 @@
+.miji-set-button {
+  width: calc(50% - 4px);
+}
+
+.miji-selected-item {
+  margin-bottom: 16px;
+}
+
+.miji-skill-title {
+  font-size: 16px;
+  color: var(--ant-primary-color);
+  font-weight: 600;
+  margin-bottom:8px;
+}
+
+.miji-selected-item .ant-checkbox-group {
+  display: block;
+  width: 100%;
+}

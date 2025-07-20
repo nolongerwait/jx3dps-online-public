@@ -1,0 +1,13 @@
+.pz-daoru-modal .ant-modal-header {
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.pz-daoru-modal .ant-modal-body {
+  min-height: 300px;
+}
+
+.pz-daoru-tabs .ant-tabs-nav {
+  margin-top: -12px;
+  margin-bottom: 0;
+}

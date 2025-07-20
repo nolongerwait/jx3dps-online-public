@@ -1,0 +1,27 @@
+.tools-jcl-info-modal-title {
+  margin-bottom: 0px;
+  font-size: 14px;
+}
+
+.tools-jcl-info-modal-tip-text {
+  color: #F34242;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.tools-jcl-info-modal-tip-icon {
+  margin-left: 4px;
+  font-size: 14px;
+  vertical-align: -1px;
+}
+
+.tools-jcl-info-modal-tip-title {
+  margin-bottom: 4px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.tools-jcl-info-modal-tip-btn {
+  color: #F34242;
+  padding: 0 4px;
+}

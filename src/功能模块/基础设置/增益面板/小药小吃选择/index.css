@@ -1,0 +1,47 @@
+.zengyi-xiaochi-xuanze {
+  padding-top: 8px;
+}
+
+.zengyi-xiaochi-item {
+  display: flex;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.zengyi-xiaochi-title {
+  width: 60px;
+  font-size: 14px;
+  margin-right: 4px;
+  margin-bottom: 0;
+}
+
+.zengyi-xiaochi-select {
+  flex: 1;
+}
+
+
+.xiaochi-diff-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.xiaochi-diff-item-name {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.xiaochi-diff-item-img {
+  height: 22px;
+  margin-right: 6px;
+  border-radius: 4px;
+}
+
+.xiaochi-zi {
+  color:#ff2dff
+}
+
+.xiaochi-lan {
+  color: rgb(0, 126, 255)
+}

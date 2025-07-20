@@ -1,0 +1,84 @@
+.tip {
+  margin: 24px 24px 12px;
+}
+
+.dataWrap {
+  margin: 0 24px 8px;
+  height: 36px;
+  position: relative;
+
+  :global {
+    .tuandui-zengyi-item-wrap,
+    .tuandui-zengyi-img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  height: 36px;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.diffText {
+  padding: 0 2px;
+  font-weight: 400;
+}
+
+.data {
+  margin-left: 12px;
+  flex: 1;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  width: 300px;
+}
+
+.info {
+  font-size: 14px;
+  text-align: left;
+  width: calc((100% - 200px - 200px) / 2);
+}
+
+.dpsItem {
+  width: 200px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.dpsBg {
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  height: 2px;
+  background-color: var(--ant-primary-color);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.checkItem {
+  margin: 0 24px 24px;
+}
+
+.checkItemTitle {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.noData {
+  text-align: center;
+}

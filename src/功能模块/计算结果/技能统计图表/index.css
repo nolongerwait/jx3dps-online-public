@@ -1,0 +1,24 @@
+.skill-chart {
+  width: calc(100% - 8px);
+  margin-left: 8px;
+  height: calc(100vh - 320px);
+}
+
+.skill-chart-tooltip .ant-tooltip-inner {
+  width: 320px;
+}
+
+.skill-chart-title {
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 16px;
+  font-size: 16px;
+}
+
+.skill-chart-title .anticon {
+  vertical-align: -1;
+  margin-left: 8px;
+  font-size: 14px;
+  color: #ccc;
+}

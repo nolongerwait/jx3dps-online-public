@@ -1,0 +1,40 @@
+.cycle-select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cycle-select-provider {
+  color: rgb(0, 128, 128);
+  font-weight: 500;
+}
+
+.cycle-select-item-tag {
+  color: #f5222d;
+  margin-left: 4px;
+}
+
+.cycle-select-item-tag-purple {
+  color: #531dab;
+}
+
+.cycle-select-item-tag-orange {
+  color: #fa7528;
+}
+
+.cycle-select-item-tag-texiao {
+  color: #ff2dff;
+}
+
+.cycle-select-item-tag-green {
+  color: #2ac88f;
+}
+
+.cycle-select-popover-content {
+  max-width: 300px;
+}
+
+.cycle-select-cycle-out {
+  text-align: center;
+  padding-bottom: 4px;
+}

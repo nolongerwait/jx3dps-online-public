@@ -1,0 +1,55 @@
+.xuanze-zhenyan {
+  display: block;
+}
+
+.zhenyan-option .ant-select-item-option-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ant-select-selection-item .zhenyan-baifenbi,
+.ant-select-selection-item .zhenyan-paiming{
+  display: none;
+}
+
+.zhenyan-baifenbi {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.85)
+}
+
+.zhenyan-option-text {
+  display: flex;
+  align-items: center;
+  flex: 1
+}
+
+.zhenyan-paiming {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  margin-left: 4px;
+  /* overflow: hidden; */
+}
+
+.zhenyan-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin-right: 4px;
+  border-radius: 50%;
+}
+
+.zhenyan-paiming-1 {
+  background-position: 20px 20px;
+}
+
+.dps-up-color {
+  color: hsl(140, 60%, 40%);
+}
+
+.dps-low-color {
+  color: #F34242;
+}

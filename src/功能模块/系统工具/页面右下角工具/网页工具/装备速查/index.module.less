@@ -1,0 +1,128 @@
+.form {
+  display: flex;
+  align-items: center;
+  margin: 0 -8px;
+}
+
+.formItem {
+  width: 280px;
+  margin: 0 8px;
+  height: 100px;
+}
+
+.nameWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+.name {
+  /* font-size: 16px; */
+  font-weight: 600;
+  margin-right: 4px;
+  margin-left: 2px;
+  /* color: #1AA174; */
+  color: var(--ant-primary-color);
+  &.nameCW {
+    color: #f90;
+  }
+}
+
+.attrWrap {
+  display: flex;
+  align-items: center;
+  margin: -4px -2px;
+  max-width: calc(100vw - 500px);
+  flex-wrap: wrap;
+}
+
+.attrItem {
+  margin: 4px 2px;
+  display: flex;
+  align-items: center;
+}
+
+.attrLabel {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.attrValue {
+  width: 50px;
+  font-weight: 500;
+}
+
+.attrCapacity {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  &:hover {
+    .attrCapacityText {
+      color: #fff;
+    }
+  }
+}
+
+.attrCapacityText {
+  position: absolute;
+  left: 8px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  color: #000;
+  transition: 0.2s;
+  pointer-events: none;
+}
+
+.attrCapacityTextItem {
+  & + .attrCapacityTextItem {
+    margin-left: 8px;
+  }
+}
+
+.attrCapacityBg {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.attrCapacityBgAttr {
+  background-color: var(--ant-primary-color);
+  opacity: 0.3;
+  border-radius: 4px 0 0 4px;
+  height: 30px;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.attrCapacityBgEffect {
+  background-color: var(--ant-primary-color);
+  opacity: 0.6;
+  border-radius: 0 4px 4px 0;
+  height: 30px;
+  transition: 0.2s;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.table {
+  min-height: calc(100vh - 400px);
+}

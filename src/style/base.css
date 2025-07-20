@@ -1,0 +1,127 @@
+html,
+body,
+#__next {
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  font-size: 12px;
+}
+
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+input,
+body {
+  font-family: 'Pingfang SC', 'Microsoft YaHei', STHeiti, Verdana, Arial, Tahoma,
+    sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:lang(zh) body {
+  font-family: 'Pingfang SC', 'Microsoft YaHei', STHeiti, Verdana, Arial, Tahoma,
+    sans-serif;
+}
+
+:lang(en) body {
+  font-family: 'Pingfang SC', 'Microsoft YaHei', STHeiti, Verdana, Arial, Tahoma,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+*:focus {
+  outline: 0;
+}
+
+p,
+ul {
+  margin-bottom: 0;
+}
+
+.iconfont {
+  font-size: 16px;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix::before {
+  display: table;
+  content: ' ';
+}
+
+.clearfix::after {
+  display: table;
+  clear: both;
+  content: ' ';
+}
+
+/* 项目定制 */
+
+.container {
+  padding: 20px;
+}
+
+.content {
+  margin-bottom: 20px;
+  background: #fff;
+}
+
+.dps-up-color {
+  color: hsl(140, 60%, 40%) !important;
+}
+
+.dps-low-color {
+  color: #f34242 !important;
+}
+
+.cycle-haste-tag {
+  font-family: 'Microsoft JhengHei', sans-serif;
+  padding: 0px 4px;
+  margin: 0px;
+  border-radius: 4px;
+  border: 1px solid #c0d8ea;
+  background: #f2f7fb;
+  color: #3b75a5;
+}
+
+.geetest_popup_ghost {
+  z-index: 5 !important;
+  pointer-events: none;
+}

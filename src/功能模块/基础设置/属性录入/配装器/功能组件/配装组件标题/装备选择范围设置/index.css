@@ -1,0 +1,57 @@
+.zhuangbei-scope-wrap {
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+}
+
+.zhuangbei-scope-icon {
+  cursor: pointer;
+  color: #333;
+  transition: color .2s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.zhuangbei-scope-text {
+  margin-left: 4px;
+}
+
+.zhuangbei-scope-icon:hover {
+  color: var(--ant-primary-color)
+}
+
+.zhuangbei-scope-form {
+  padding-top: 16px;
+}
+
+.zhuangbei-scope-form .ant-form-item{
+  margin-bottom: 0px;
+}
+
+.zhuangbei-scope-label {
+  width: 472px;
+  margin-right: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.zhuangbei-scope-level-label-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.zhuangbei-scope-level-label-tag {
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.zhuangbei-scope-level-number {
+  margin-left: 12px;
+  color: rgba(3, 10, 26, 0.45);
+}
+
+.zhuangbei-scrop-out-tag {
+  margin-right: 6px;
+}

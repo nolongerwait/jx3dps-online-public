@@ -1,0 +1,12 @@
+.zhuangbei-zengyi-wrapper {
+  margin-bottom: 12px;
+  padding: 8px 16px;
+  border-radius: 2px;
+  border: 1px solid #d9d9d9;
+}
+
+.zhuangbei-zengyi-content {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -4px;
+}

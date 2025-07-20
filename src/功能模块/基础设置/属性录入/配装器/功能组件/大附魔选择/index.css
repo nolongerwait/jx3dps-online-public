@@ -1,0 +1,20 @@
+.dafumo-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  border-radius: 4px;
+}
+
+.dafumo-select-popup .ant-select-item-option-content,
+.dafumo-select .ant-select-selector .ant-select-selection-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* height: 32px; */
+}
+
+.dafumo-diff-wrap {
+  display: flex;
+  align-items: center;
+}

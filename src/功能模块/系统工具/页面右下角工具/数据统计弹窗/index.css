@@ -1,0 +1,24 @@
+.change-tooltip-list-item-title {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.change-tooltip-list-item {
+  font-size: 12px;
+  line-height: 22px;
+  display: block;
+  margin-bottom: 4px;
+  display: flex;
+  width: 120px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.change-tooltip-list-item-value {
+  font-weight: 500;
+  margin-left: 4px;
+  font-size: 14px;
+}

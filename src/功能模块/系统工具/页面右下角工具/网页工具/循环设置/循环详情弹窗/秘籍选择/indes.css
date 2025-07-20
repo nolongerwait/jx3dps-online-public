@@ -1,0 +1,22 @@
+.cycle-setting-miji-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid rgba(3, 10, 26, 0.12);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.cycle-setting-miji-item {
+  margin: 0 4px;
+}
+
+.cycle-setting-miji-btn {
+  padding: 0;
+  margin-left: 12px;
+}
+
+.cycle-setting-miji-empty {
+  color: rgba(3, 10, 26, 0.45);
+  margin: 0 4px;
+}

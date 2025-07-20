@@ -1,0 +1,17 @@
+.cycle-setting-btns {
+  margin-bottom: 12px;
+}
+
+.cycle-setting-btn {
+  margin-right: 8px;
+}
+
+.cycle-setting-list-btns {
+  display: flex;
+  align-items: center;
+}
+
+.cycle-setting-list-btns .ant-btn-link {
+  margin-right: 8px;
+  padding: 0;
+}

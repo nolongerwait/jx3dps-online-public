@@ -1,0 +1,80 @@
+.chart {
+  width: 100%;
+  height: calc(100vh - 100px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 16px;
+  margin: 0;
+}
+
+.tip {
+  color: #ff0000;
+  font-size: 12px;
+  margin-left: 12px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 24px;
+}
+
+.select {
+  width: 150px;
+  margin-right: 12px;
+}
+
+.watermark::after {
+  content: '百强数据过少，数据误差大，纯娱乐，被拿去带节奏与计算器作者无关'; /* 水印文字 */
+
+  /* 定位设置 */
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999; /* 确保在最上层 */
+
+  /* 文字样式 */
+  color: rgba(80, 80, 80, 0.2); /* 水印颜色 */
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+
+  /* 水印排列 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 防干扰设置 */
+  pointer-events: none; /* 禁止鼠标交互 */
+  user-select: none; /* 禁止文字选择 */
+
+  /* 水印背景模式 */
+  background: repeating-linear-gradient(
+    -30deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 120, 255, 0.02) 10px,
+    rgba(0, 120, 255, 0.02) 20px
+  );
+
+  /* 添加文字阴影 */
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
+
+  /* 添加旋转效果 */
+  // transform: rotate(-15deg);
+}

@@ -1,0 +1,205 @@
+// 技能循环显示技能单元
+import React, { useMemo } from 'react'
+import { Badge, Dropdown, Space, Tooltip } from 'antd'
+import { CloseCircleFilled } from '@ant-design/icons'
+import classNames from 'classnames'
+import { Buff枚举 } from '../../通用框架/类型定义/Buff'
+import { 模拟信息类型 } from '../../通用框架/类型定义/模拟'
+import { 显示循环技能类型 } from '../../通用框架/类型定义/技能'
+import { 每秒郭氏帧 } from '@/数据/常量'
+import BuffItem from './BuffItem'
+import styles from './index.module.less'
+
+interface CycleSkillItemProps {
+  技能: 显示循环技能类型
+  删除循环技能: (e: number) => void
+  模拟信息: 模拟信息类型
+  buff覆盖数据: number[]
+  buff覆盖索引: number
+  更新buff覆盖数据: (e: number[], 索引: number) => void
+  点击下拉菜单: (e: any) => void
+  原始Buff数据: Buff枚举
+  允许操作列表?: string[]
+}
+
+function CycleSkillItem(props: CycleSkillItemProps) {
+  const {
+    技能,
+    删除循环技能,
+    模拟信息,
+    buff覆盖数据,
+    buff覆盖索引,
+    更新buff覆盖数据,
+    原始Buff数据,
+    点击下拉菜单,
+    允许操作列表 = ['插入技能', '删除后续'],
+  } = props
+
+  const 判断开始释放时间 = (技能?.开始读条时间 ? 技能.开始读条时间 : 技能.实际释放时间) || 0
+  const 读条时间 = 技能?.开始读条时间
+    ? Math.round((((技能.实际释放时间 || 0) - (技能.开始读条时间 || 0)) / 每秒郭氏帧) * 100) / 100
+    : 0
+
+  const 技能索引 = 技能?.index || 0
+
+  const 技能释放时间 = Math.round(((判断开始释放时间 || 0) / 每秒郭氏帧) * 100) / 100
+  const 间隔CD = (判断开始释放时间 || 0) - (技能.计划释放时间 || 0)
+  // 把帧转成秒，保留两位小数
+  const 剩余秒 = Math.round((间隔CD / 每秒郭氏帧) * 100) / 100
+  // 是否异常
+  // 存在异常索引
+  const 索引 = (模拟信息?.循环异常信息?.异常索引 || 0) + -1
+  const 是否异常 = 模拟信息?.循环执行结果 === '异常' ? (技能?.index || 0) >= 索引 : false
+  const 当前异常 = 模拟信息?.循环执行结果 === '异常' ? (技能?.index || 0) === 索引 : false
+
+  const 技能释放结果 = 技能?.技能释放记录结果 || {}
+
+  const 判断有无重要buff标记 = () => {
+    if (技能释放结果?.造成buff数据?.buff名称) {
+      更新buff覆盖数据(
+        [技能释放结果?.造成buff数据?.buff开始时间, 技能释放结果?.造成buff数据?.buff结束时间],
+        技能索引
+      )
+    }
+  }
+
+  const 卸除重要buff标记 = () => {
+    更新buff覆盖数据([], 0)
+  }
+
+  const 当前是否需要高亮展示在buff覆盖中 = useMemo(() => {
+    if (技能?.技能名称 === '换行') {
+      return false
+    }
+    if (
+      (技能?.实际释放时间 || 0) <= buff覆盖数据?.[1] &&
+      (技能?.实际释放时间 || 0) >= buff覆盖数据?.[0] &&
+      技能索引 >= buff覆盖索引
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }, [buff覆盖数据, buff覆盖索引, 技能索引, 技能])
+
+  const cls = classNames(
+    styles.skill,
+    是否异常 ? styles.error : '',
+    当前是否需要高亮展示在buff覆盖中 ? styles.highlight : ''
+  )
+
+  const 图标 = useMemo(() => {
+    return 技能释放结果?.实际图标 || 技能.图标
+  }, [技能, 技能释放结果])
+
+  const 下拉菜单 = useMemo(() => {
+    const list = [
+      {
+        key: '前部插入',
+        disabled: !允许操作列表?.includes('插入技能'),
+        label: (
+          <span>
+            在<span className={styles.tipBefore}>前部</span>添加技能
+          </span>
+        ),
+      },
+      {
+        key: '后部插入',
+        disabled: !允许操作列表?.includes('插入技能'),
+        label: (
+          <span>
+            在<span className={styles.tipAfter}>后部</span>添加技能
+          </span>
+        ),
+      },
+      {
+        key: '删除后续',
+        disabled: !允许操作列表?.includes('删除后续'),
+        label: (
+          <span>
+            删除<span className={styles.tipAfter}>后续</span>全部技能
+          </span>
+        ),
+      },
+      {
+        key: '设置延迟时间',
+        disabled: !允许操作列表?.includes('设置延迟'),
+        label: (
+          <span>
+            设置技能<span className={styles.tipAfter}>延迟</span>时间
+          </span>
+        ),
+      },
+    ]
+    return list.filter((item) => !item?.disabled)
+  }, [])
+
+  return (
+    <Badge count={剩余秒} offset={[-52, 8]} className={'cycle-simulator-setting-skill-drag'}>
+      <Dropdown menu={{ items: 下拉菜单, onClick: 点击下拉菜单 }} trigger={['contextMenu']}>
+        <div className={cls} onMouseEnter={判断有无重要buff标记} onMouseLeave={卸除重要buff标记}>
+          <Tooltip
+            title={
+              <div>
+                <p>{技能?.技能名称}</p>
+                {技能释放时间 !== undefined ? <p>释放时间：{技能释放时间}秒</p> : null}
+                {技能释放结果.实际伤害技能 ? <p>伤害名称：{技能释放结果.实际伤害技能}</p> : null}
+                {剩余秒 ? <p>释放等待CD：{剩余秒}秒</p> : null}
+                {读条时间 ? <p>读条：{读条时间}秒</p> : null}
+                {技能释放结果?.重要buff列表?.length ? (
+                  <Space className={styles.settingBuff} size={[8, 8]} wrap>
+                    {技能释放结果?.重要buff列表.map((item) => {
+                      return (
+                        <BuffItem
+                          原始Buff数据={原始Buff数据}
+                          data={item}
+                          key={item}
+                          className={styles.settingBuffItem}
+                        />
+                      )
+                    })}
+                  </Space>
+                ) : null}
+                {技能?.额外信息
+                  ? Object.keys(技能?.额外信息)?.map((key) => {
+                      return (
+                        <p key={`${技能?.技能名称}_${索引}_${技能?.额外信息?.[key]}`}>
+                          <span>{key}：</span>
+                          <span>{技能?.额外信息?.[key]}</span>
+                        </p>
+                      )
+                    })
+                  : null}
+                {是否异常 ? (
+                  当前异常 ? (
+                    <p>异常：{模拟信息?.循环异常信息?.异常信息?.信息}</p>
+                  ) : (
+                    <p>前置技能异常</p>
+                  )
+                ) : null}
+              </div>
+            }
+          >
+            <img className={styles.skillImage} src={图标} />
+          </Tooltip>
+          <CloseCircleFilled
+            className={styles.close}
+            onClick={() => 删除循环技能(技能?.index || 0)}
+          />
+          {技能释放结果?.伤害段数 ? (
+            <span className={`${styles.count} ${styles[`count${技能释放结果?.伤害段数}`]}`}>
+              {技能释放结果?.伤害段数}
+            </span>
+          ) : null}
+          {技能释放结果?.特殊标记 !== undefined ? (
+            <span className={`${styles.countTip} ${styles[`count${技能释放结果?.特殊标记}`]}`}>
+              {技能释放结果?.特殊标记 || 0}
+            </span>
+          ) : null}
+        </div>
+      </Dropdown>
+    </Badge>
+  )
+}
+
+export default CycleSkillItem

@@ -1,0 +1,97 @@
+.wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.empty {
+  font-size: 14px;
+  color: rgba(3, 10, 26, 0.45);
+  margin-left: 12px;
+}
+
+.operate {
+  margin-left: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: .2s;
+  &:hover {
+    color: var(--ant-primary-color);
+  }
+}
+
+.buffWrap {
+  display: flex;
+  align-items: center;
+}
+
+.buff {
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ant-primary-3);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.buffImgWrap {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  margin-right: 8px;
+}
+
+.buffImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+}
+
+.buffName {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.buffTime {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.buffTimeText {
+  color: var(--ant-primary-color);
+  font-weight: 500;
+}
+
+.buffCount {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ant-primary-color);
+  opacity: 0.9;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+  font-weight: 500;
+  font-size: 12px;
+  border: 1px solid #fff;
+}
+
+.close {
+  color: #f00;
+  cursor: pointer;
+  margin-left: 4px;
+  transition: .2s;
+  &:hover {
+    color: rgb(130, 0, 0)
+  }
+}

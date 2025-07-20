@@ -1,0 +1,21 @@
+.zhuangbei-form-item {
+  display: flex;
+}
+
+.zhuangbei-form-item-left-1 {
+  width: 380px;
+  padding-right: 12px;
+}
+
+.zhuangbei-form-item-left-2 {
+  width: 122px;
+  padding-right: 12px;
+}
+
+.zhuangbei-form-item-left-3 {
+  width: 66px;
+}
+
+.zhuangbei-form-item-left-4 {
+  width: 280px;
+}

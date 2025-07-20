@@ -1,0 +1,21 @@
+.cycle-select-add-input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+.cycle-select-add-input-wrap .ant-input {
+  flex: 1
+}
+
+.cycle-select-label-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cycle-select-delete-btn {
+  margin-left: 8px;
+  color: var(--ant-primary-color-hover);
+  text-decoration: underline;
+}

@@ -1,0 +1,27 @@
+.haste-layout {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+  height: calc(100vh - 48px);
+  width: calc(100vw - 48px);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 12px 24px 24px;
+}
+
+
+.haste-layout-input {
+  width: 200px;
+  margin-right: 12px;
+}
+
+
+.haste-layout-content {
+  margin-bottom: 24px;
+}
+
+.haste-layout-table {
+  max-height: calc(100vh - 48px - 32px - 24px - 46px - 12px - 24px);
+}

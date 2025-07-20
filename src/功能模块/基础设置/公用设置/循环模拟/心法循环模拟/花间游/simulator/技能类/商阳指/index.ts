@@ -1,0 +1,38 @@
+import 循环模拟技能基础数据 from '../../../constant/skill'
+import 技能统一类 from '../../通用类/技能统一类'
+
+class 商阳指 extends 技能统一类 {
+  // scripts/skill/万花\万花_点穴截脉_商阳指.lua
+  static 技能数据 = 循环模拟技能基础数据?.find((item) => item.技能名称 === '商阳指')
+  static 获得墨意 = 5
+
+  constructor(模拟循环) {
+    super(模拟循环)
+  }
+
+  命中() {
+    this.折花伤害触发判定('商阳')
+    this.焚玉伤害触发判定()
+    this.触发伤害行为('商阳指')
+    this.墨意变化(商阳指.获得墨意)
+    this?.模拟循环?.技能类实例集合?.DOT_商阳指?.获得和刷新商阳指()
+    this?.保存释放记录('商阳指')
+    this?.涓流函数()
+  }
+
+  保存释放记录(名称) {
+    const 保存显示段数 = this.模拟循环.显示涓流层数
+      ? this.模拟循环.当前自身buff列表['涓流']?.当前层数 || 0
+      : undefined
+
+    this.本次释放记录 = {
+      伤害段数: 保存显示段数,
+      实际伤害技能: 名称,
+      重要buff列表: this.获取当前重要buff列表(['钟灵', '倚天', '涓流', '乱洒青荷', '布散畅和']),
+    }
+  }
+}
+
+export default 商阳指
+
+export const 商阳指类型 = typeof 商阳指

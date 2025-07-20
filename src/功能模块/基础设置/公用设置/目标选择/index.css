@@ -1,0 +1,18 @@
+.target-select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.target-select-item-tag {
+  color: #f5222d;
+  margin-left: 8px;
+}
+
+.target-select-item-tag-purple {
+  color: #531dab;
+}
+
+.target-select-item-tag-orange {
+  color: #fa7528;
+}

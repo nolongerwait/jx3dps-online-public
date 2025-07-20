@@ -1,0 +1,44 @@
+.textArea {
+  display: block;
+  height: 400px;
+  margin-bottom: 16px;
+}
+
+.buttonText {
+  display: flex;
+  justify-content: flex-end;
+  :global {
+    .ant-btn {
+      margin-left: 16px;
+    }
+  }
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: -4px -4px 4px;
+}
+
+.item {
+  width: calc(25% - 8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4px;
+}
+
+.contentText {
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 8px;
+  word-break: keep-all;
+}

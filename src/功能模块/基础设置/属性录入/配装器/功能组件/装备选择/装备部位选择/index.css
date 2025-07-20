@@ -1,0 +1,84 @@
+.zhuangbei-select {
+  width: 340px;
+}
+
+.zhuangbei-select .zhuangbei-diff {
+  display: none;
+}
+
+.zhuangbei-miaoshu-label + .zhuangbei-miaoshu-label {
+  margin-left: 4px;
+}
+
+.zhuangbei-select-item.ant-select-item {
+  min-height: 24px;
+}
+
+.zhuangbei-select-item .ant-select-item-option-content,
+.zhuangbei-select .ant-select-selector .ant-select-selection-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zhuangbei-select-item-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.zhuangbei-select-img {
+  width: 20px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.zhuangbei-select-name {
+  /* font-size: 16px; */
+  font-weight: 600;
+  margin-right: 6px;
+  /* color: #1AA174; */
+  color: var(--ant-primary-color);
+}
+
+.zhuangbei-select-name-cw {
+  color: #f90;
+}
+
+.zhuangbei-select-shuoming {
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  /* line-height: 30px; */
+}
+
+.zhuangbei-miaoshu-label-jingjian {
+  color: #f34242;
+}
+
+.zhuangbei-miaoshu-label-texiao {
+  color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zhuangbei-miaoshu-label-texiao-text {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: 28px;
+  height: 18px;
+}
+
+.zhuangbei-miaoshu-label-pvx {
+  color: rgb(0, 128, 128);
+}
+
+.zhuangbei-select-level {
+  color: #000000a6;
+  /* line-height: 30px; */
+}
+
+.zhuangbei-diff {
+  margin-right: 8px;
+}

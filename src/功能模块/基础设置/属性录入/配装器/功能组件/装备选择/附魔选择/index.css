@@ -1,0 +1,9 @@
+.fumo-select.ant-select.ant-select-in-form-item {
+  width: 110px;
+}
+
+.fumo-diff-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

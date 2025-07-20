@@ -1,0 +1,92 @@
+.pz-daoru-input-wrap {
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pz-daoru-input-wrap.no-padding {
+  padding: 0;
+}
+
+.pz-daoru-input-wrap-input {
+  width: 35%;
+}
+
+.pz-daoru-input {
+  margin-right: 12px;
+}
+
+.pz-daoru-success-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pz-daoru-text-wrap {
+  height: 100px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.pz-daoru-success-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border:1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 12px 24px;
+  margin-right: 12px;
+}
+
+.pz-daoru-success-tip{
+  margin-bottom: 12px;
+}
+
+.pz-daoru-success-title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 16px;
+  max-width: calc(100% - 140px);
+  color: var(--ant-primary-color);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pz-daoru-success-title-text {
+  color: var(--ant-primary-color);
+}
+
+.pz-daoru-success-title-text:hover {
+  color: var(--ant-primary-color-hover);
+}
+
+.pz-daoru-success-user {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  width: 140px;
+}
+
+.pz-daoru-success-avatar {
+  display: block;
+  width: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  height: 40px;
+  margin-right: 8px;
+}
+
+.pz-daoru-text-error {
+  color: #F34242
+}
+
+.pz-daoru-help-img {
+  width: 100%;
+}

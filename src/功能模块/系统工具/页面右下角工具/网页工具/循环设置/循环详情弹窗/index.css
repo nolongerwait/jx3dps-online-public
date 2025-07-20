@@ -1,0 +1,29 @@
+.cycle-edit {
+  margin-top: 24px;
+}
+
+.cycle-edit-modal .ant-modal-body {
+  max-height: calc(100vh - 200px);
+  overflow: auto;
+}
+
+.cycle-form {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px
+}
+
+.cycle-edit-item {
+  width: 200px;
+  margin: 0 8px 12px;
+}
+
+.cycle-edit-item-cycle-empty {
+  color: rgba(3, 10, 26, 0.45);
+  font-size: 14px;
+  line-height: 32px;
+  margin: 0;
+  border: 1px solid rgba(3, 10, 26, 0.12);
+  padding: 4px 8px;
+  border-radius: 8px;
+}

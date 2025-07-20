@@ -1,0 +1,49 @@
+.school-switch {
+  position: fixed;
+  right: 12px;
+  top: 24px;
+  width: 48px;
+  height: 48px;
+}
+
+.school-switch-wujie-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  z-index: 0;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 24px rgba(206,213,190,1), 0 0px 12px rgba(206,213,190,1);
+}
+
+.school-switch-list-item {
+  display: flex;
+  align-items: center;
+  padding-right: 4px;
+}
+
+.school-switch-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: block;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: .3s;
+  opacity: 0.8;
+}
+
+.school-switch-list-item-active {
+  background-color: #f0f0f0;
+}
+
+.school-switch-list-img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}

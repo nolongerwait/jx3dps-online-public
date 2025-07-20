@@ -1,0 +1,22 @@
+.cycle-setting-qixue-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid rgba(3, 10, 26, 0.12);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.cycle-setting-qixue-item {
+  margin: 0 4px;
+}
+
+.cycle-setting-qixue-btn {
+  padding: 0;
+  margin-left: 12px;
+}
+
+.cycle-setting-qixue-empty {
+  color: rgba(3, 10, 26, 0.45);
+  margin: 0 4px;
+}

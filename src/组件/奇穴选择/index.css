@@ -1,0 +1,11 @@
+.component-qixue-select-value {
+  color: rgba(3, 10, 26, 0.85);
+}
+
+.component-qixue-select-value-empty {
+  color: rgba(3, 10, 26, 0.45);
+}
+
+.component-qixue-select-value-btn {
+  margin-left: 8px;
+}

@@ -1,0 +1,172 @@
+.equipWrap {
+  position: absolute;
+  right: 70px;
+  top: 36px;
+  text-align: center;
+  width: 452px;
+}
+
+.equip {
+  display: flex;
+  height: 43px;
+  align-items: center;
+}
+
+.equipIcon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  position: relative;
+  margin-right: 8px;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.border {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.info {
+  width: 160px;
+  color: #fff;
+
+  .name {
+    display: flex;
+    align-items: center;
+    height: 14px;
+    line-height: 14px;
+    margin-bottom: 4px;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  .nameText {
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 0px;
+    margin-bottom: 0;
+  }
+
+  .gainLevel {
+    font-size: 12px;
+    margin-left: 6px;
+    margin-bottom: 0;
+  }
+}
+
+.position {
+  font-size: 12px;
+  margin-bottom: 0;
+  margin-right: 8px;
+  color: #fff;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  height: 12px;
+}
+
+.desc {
+  margin: 0;
+  margin-left: 6px;
+  font-weight: 500;
+  color: #21f688;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.descTip {
+  & + .descTip {
+    margin-left: 4px;
+  }
+}
+
+.jingjian {
+  color: #ffe700;
+}
+
+.texiao {
+  color: rgb(120, 255, 255);
+}
+
+.stoneWrap {
+  width: 84px;
+  display: flex;
+  align-items: center;
+
+  .stone {
+    width: 28px;
+    text-align: center;
+  }
+
+  .stone + .stone {
+    margin-left: 0px;
+  }
+
+  .stoneImg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto 2px;
+    border-radius: 2px;
+  }
+
+  .stoneText {
+    color: #fff;
+    opacity: 0.9;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 400;
+  }
+}
+
+.gainWrap {
+  padding-left: 16px;
+  flex: 1;
+  text-align: left;
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.gain {
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+}
+
+.gainContent {
+  height: 16px;
+}
+
+.bigGain {
+  display: flex;
+  align-items: center;
+}
+
+.gainIcon {
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+}
+
+.stoneTip {
+  margin-left: 16px;
+  color: #fff;
+  text-shadow: none;
+  opacity: 0.8;
+  font-weight: 400;
+}

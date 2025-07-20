@@ -1,0 +1,25 @@
+.haste-equipment-select-content {
+  margin: -4px;
+}
+
+.haste-equipment-select {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.haste-equipment-select-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.haste-equipment-select-position {
+  color: rgb(0, 128, 128);
+  margin-right: 8px;
+}
+
+.haste-equipment-select-tag {
+  padding: 2px 6px;
+  margin: 4px;
+  font-size: 14px;
+}
