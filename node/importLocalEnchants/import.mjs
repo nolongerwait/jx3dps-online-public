@@ -10,8 +10,8 @@ async function 获取全部部位的数据() {
     if (该部位数据) {
       Object.keys(该部位数据).forEach((key) => {
         const 附魔数据 = 该部位数据[key]
-        if (附魔数据?.id && 附魔数据?.attr) {
-          const 获取属性 = 附魔数据?.attr
+        if (附魔数据?.id && 附魔数据?.attributes) {
+          const 获取属性 = 附魔数据?.attributes
           Object.keys(获取属性)?.forEach(属性 => {
             const 加成值  = 获取属性[属性]
             const 简写 = attrSingleName[属性]

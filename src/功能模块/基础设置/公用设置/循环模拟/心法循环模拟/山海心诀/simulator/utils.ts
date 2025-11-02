@@ -35,7 +35,7 @@ export const 根据奇穴修改buff数据 = (奇穴: string[]) => {
 
 export const 根据奇穴秘籍修改技能数据 = (
   奇穴: string[],
-  秘籍: 选中秘籍信息
+  秘籍: 选中秘籍信息,
 ): 循环基础技能数据类型[] => {
   const 判断奇穴 = (val) => {
     return 奇穴?.includes(val)
@@ -63,6 +63,18 @@ export const 根据奇穴秘籍修改技能数据 = (
       return {
         ...技能,
         技能CD: 技能原始CD,
+      }
+    } else if (技能?.技能名称 === '聚势摧霆') {
+      let 技能原始CD = 技能.技能CD || 0
+      let 最大充能层数 = 技能.最大充能层数 || 1
+      if (判断奇穴('连珠')) {
+        技能原始CD = 技能原始CD - 每秒郭氏帧 * 3
+        最大充能层数 = 1
+      }
+      return {
+        ...技能,
+        技能CD: 技能原始CD,
+        最大充能层数,
       }
     } else {
       return 技能

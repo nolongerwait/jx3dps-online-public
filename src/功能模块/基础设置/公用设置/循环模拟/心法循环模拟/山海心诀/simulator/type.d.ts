@@ -73,6 +73,7 @@ export interface 技能类实例集合 {
   下马?: any
   游雾乘云?: any
   聚势摧霆?: any
+  没石饮羽?: any
 }
 
 export interface 技能GCD组 {

@@ -32,6 +32,7 @@ function StatusBar(props: StatusBarProps) {
       <Buff
         title='目标Buff'
         buff列表={模拟信息?.当前目标buff列表}
+        DOT列表={模拟信息?.当前DOT运行状态}
         当前时间点={模拟信息?.当前时间}
       />
       <DpsRes

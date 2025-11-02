@@ -194,9 +194,7 @@ function CycleSimulator() {
       更新奇穴数据: 奇穴信息,
       更新秘籍信息: 秘籍信息,
     }
-    const { 秒伤, 计算结果技能列表, 秒伤计算时间, 总伤 } = dispatch(
-      秒伤计算(计算参数)
-    )
+    const { 秒伤, 计算结果技能列表, 秒伤计算时间, 总伤 } = dispatch(秒伤计算(计算参数))
     更新模拟DPS结果({
       秒伤: 当前时间 > 0 ? 秒伤 : 0,
       总伤: 当前时间 > 0 ? 总伤 : 0,
@@ -226,16 +224,10 @@ function CycleSimulator() {
         // const 本技能为起点 = data?.技能名称 === '跃潮斩波'
 
         if (打完本技能换轮次) {
-          res[res?.length - 1] = [
-            ...(res[res?.length - 1] || []),
-            { ...data, index: index || 0 },
-          ]
+          res[res?.length - 1] = [...(res[res?.length - 1] || []), { ...data, index: index || 0 }]
           res[res?.length] = []
         } else {
-          res[res?.length - 1] = [
-            ...(res[res?.length - 1] || []),
-            { ...data, index: index || 0 },
-          ]
+          res[res?.length - 1] = [...(res[res?.length - 1] || []), { ...data, index: index || 0 }]
         }
       }
       return data
@@ -255,19 +247,13 @@ function CycleSimulator() {
     setCycle(newCycle)
   }
 
-  const 向循环内插入技能 = (
-    item: 循环基础技能数据类型[],
-    插入位置,
-    插入索引
-  ) => {
+  const 向循环内插入技能 = (item: 循环基础技能数据类型[], 插入位置, 插入索引) => {
     let newCycle: 循环基础技能数据类型[] = [...(cycle || [])]
     let addCycle: 循环基础技能数据类型[] = []
 
     if (插入位置 === '前部插入') {
       // 在索引 2 前插入多个元素
-      addCycle = newCycle
-        .slice(0, 插入索引)
-        .concat(item, newCycle.slice(插入索引))
+      addCycle = newCycle.slice(0, 插入索引).concat(item, newCycle.slice(插入索引))
       更新添加设置({ ...添加设置, 索引: 添加设置.索引 + item.length })
     } else {
       // 在索引 2 后插入多个元素
@@ -319,7 +305,7 @@ function CycleSimulator() {
   return (
     <>
       <Modal
-        className="cycle-simulator-modal simulator-shxj"
+        className='cycle-simulator-modal simulator-shxj'
         maskClosable={false}
         width={'100%'}
         title={
@@ -328,7 +314,10 @@ function CycleSimulator() {
             大橙武模拟={大橙武模拟}
             设置自定义循环保存弹窗={设置自定义循环保存弹窗}
             清空循环={() => setCycle([])}
-            快速导入循环={(循环) => setCycle(循环)}
+            快速导入循环={(循环, 额外信息) => {
+              setCycle(循环)
+              更新自动鸟啄(额外信息?.自动鸟啄)
+            }}
             更新奇穴信息={更新奇穴信息}
             更新奇穴弹窗展示={更新奇穴弹窗展示}
             加速值={加速值}
@@ -350,9 +339,7 @@ function CycleSimulator() {
         <div className={'cycle-simulator-setting'}>
           <心法配置
             原始Buff数据={根据奇穴修改buff数据(奇穴信息)}
-            配置区={
-              <心法特殊配置 自动鸟啄={自动鸟啄} 更新自动鸟啄={更新自动鸟啄} />
-            }
+            配置区={<心法特殊配置 自动鸟啄={自动鸟啄} 更新自动鸟啄={更新自动鸟啄} />}
           />
           {/* 角色状态栏 */}
           <StatusBar

@@ -792,19 +792,19 @@ class 循环主类 {
 
   获取当前各技能的运行状态() {
     const 各技能当前运行状态 = {}
-      ; (Object.keys(this.技能类实例集合) || []).forEach((key) => {
-        各技能当前运行状态[key] = this.技能类实例集合[key]?.技能运行数据 || {}
-      })
+    ;(Object.keys(this.技能类实例集合) || []).forEach((key) => {
+      各技能当前运行状态[key] = this.技能类实例集合[key]?.技能运行数据 || {}
+    })
     return 各技能当前运行状态
   }
 
   获取各DOT的运行状态() {
     const DOT运行数据 = {}
-      ; (Object.keys(this.技能类实例集合) || []).forEach((key) => {
-        if (this.技能类实例集合[key]?.DOT运行数据) {
-          DOT运行数据[key] = this.技能类实例集合[key]?.DOT运行数据 || {}
-        }
-      })
+    ;(Object.keys(this.技能类实例集合) || []).forEach((key) => {
+      if (this.技能类实例集合[key]?.DOT运行数据) {
+        DOT运行数据[key] = this.技能类实例集合[key]?.DOT运行数据 || {}
+      }
+    })
     return DOT运行数据
   }
 }

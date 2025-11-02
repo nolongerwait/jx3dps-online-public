@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-semi */
 // import { 每秒郭氏帧 } from '@/数据/常量'
 import { 每秒郭氏帧 } from '@/数据/常量'
 import 循环模拟技能基础数据, { 原始Buff数据 } from '../constant/skill'
@@ -12,37 +13,41 @@ export const 根据奇穴修改buff数据 = (奇穴: string[]) => {
   Object.keys(原始Buff数据).forEach((key) => {
     const obj = 原始Buff数据[key]
     switch (key) {
-      case '振翅图南':
+      case '振翅图南_0':
+      case '振翅图南_1':
+      case '振翅图南_2':
+      case '振翅图南_3':
+      case '振翅图南_4':
         if (判断奇穴('驰行')) {
           // eslint-disable-next-line @typescript-eslint/no-extra-semi
-          ; (obj as DotDTO).最大作用次数 = 20
-            ; (obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 10
+          ;(obj as DotDTO).最大作用次数 = 20
+          ;(obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 10
         } else {
           // eslint-disable-next-line @typescript-eslint/no-extra-semi
-          ; (obj as DotDTO).最大作用次数 = 12
-            ; (obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 6
+          ;(obj as DotDTO).最大作用次数 = 12
+          ;(obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 6
         }
         break
       case '驰风震域':
         if (判断奇穴('梦悠')) {
           // eslint-disable-next-line @typescript-eslint/no-extra-semi
-          ; (obj as DotDTO).最大作用次数 = 40
-            ; (obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 10
+          ;(obj as DotDTO).最大作用次数 = 40
+          ;(obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 10
         } else {
           // eslint-disable-next-line @typescript-eslint/no-extra-semi
-          ; (obj as DotDTO).最大作用次数 = 24
-            ; (obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 6
+          ;(obj as DotDTO).最大作用次数 = 24
+          ;(obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 6
         }
         break
       case '驰风震域·海碧':
         if (判断奇穴('梦悠')) {
           // eslint-disable-next-line @typescript-eslint/no-extra-semi
-          ; (obj as DotDTO).最大作用次数 = 32
-            ; (obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 8
+          ;(obj as DotDTO).最大作用次数 = 40
+          ;(obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 10
         } else {
           // eslint-disable-next-line @typescript-eslint/no-extra-semi
-          ; (obj as DotDTO).最大作用次数 = 16
-            ; (obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 4
+          ;(obj as DotDTO).最大作用次数 = 24
+          ;(obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 6
         }
         break
       default:
@@ -61,20 +66,28 @@ export const 根据奇穴秘籍修改技能数据 = (奇穴: string[]): 循环�
 
   const res: 循环基础技能数据类型[] = 循环模拟技能基础数据.map((技能) => {
     if (技能?.技能名称 === '振翅图南') {
-      return 判断奇穴('驾鸾')
-        ? {
-          ...技能,
-          最大充能层数: 2,
-          技能CD: 每秒郭氏帧 * 25,
-        }
-        : 技能
+      let 技能CD = 判断奇穴('驾鸾') ? 每秒郭氏帧 * 25 : 每秒郭氏帧 * 20
+      const 技能充能层数 = 判断奇穴('驾鸾') ? 2 : 技能.最大充能层数 || 1
+      if (判断奇穴('风驰')) {
+        技能CD = 技能CD - 每秒郭氏帧 * 4
+      }
+      return {
+        ...技能,
+        最大充能层数: 技能充能层数,
+        技能CD: 技能CD,
+      }
     } else if (技能?.技能名称 === '浮游天地') {
-      return 判断奇穴('藏锋')
-        ? {
-          ...技能,
-          最大充能层数: 2,
-        }
-        : 技能
+      let 技能CD = 技能.技能CD || 0
+      let 最大充能层数 = 技能.最大充能层数 || 1
+      if (判断奇穴('藏锋')) {
+        技能CD = 每秒郭氏帧 * 20
+        最大充能层数 = 2
+      }
+      return {
+        ...技能,
+        技能CD,
+        最大充能层数,
+      }
     } else if (技能?.技能名称 === '跃潮斩波') {
       let 技能原始CD = 技能.技能CD || 0
       if (判断奇穴('潮音')) {
@@ -84,23 +97,19 @@ export const 根据奇穴秘籍修改技能数据 = (奇穴: string[]): 循环�
         ...技能,
         技能CD: 技能原始CD,
       }
-    } else if (技能?.技能名称 === '海运南冥') {
-      return 判断奇穴('澄穆')
-        ? { ...技能, 技能CD: 每秒郭氏帧 * 4 }
-        : { ...技能, 技能CD: 每秒郭氏帧 * 5 }
     } else if (技能?.技能名称 === '溟海御波') {
-      let 技能原始CD = 技能.技能CD || 0
+      const 技能原始CD = 技能.技能CD || 0
       let 最大充能层数 = 技能.最大充能层数 || 1
-      if (判断奇穴('澄穆')) {
-        技能原始CD = 技能原始CD - 每秒郭氏帧 * 1
-      }
+      // if (判断奇穴('澄穆')) {
+      //   技能原始CD = 技能原始CD - 每秒郭氏帧 * 1
+      // }
       if (判断奇穴('遥思')) {
         最大充能层数 = 2
       }
       return {
         ...技能,
         技能CD: 技能原始CD,
-        最大充能层数
+        最大充能层数,
       }
     } else {
       return 技能

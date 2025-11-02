@@ -2,6 +2,7 @@ import { 获取实际帧数 } from '@/工具函数/data'
 import 循环模拟技能基础数据 from '../../../constant/skill'
 import 有CD技能通用类 from '../../通用类/有CD技能通用类'
 import { 每秒郭氏帧 } from '@/数据/常量'
+import { 定式黑白实例 } from '../../定式黑白'
 
 class 玉石俱焚 extends 有CD技能通用类 {
   // scripts/skill/万花/万花_百花拂穴手_玉石俱焚.lua
@@ -11,6 +12,7 @@ class 玉石俱焚 extends 有CD技能通用类 {
   static 获得墨意 = 5
   static 本次释放墨意变化 = 0
   static 释放重置 = false
+  static 定式黑白引爆次数 = 0
 
   constructor(模拟循环) {
     super(模拟循环)
@@ -40,17 +42,28 @@ class 玉石俱焚 extends 有CD技能通用类 {
 
     this.橙武刷新DOT()
     this.DOT跳数记录()
+    this.结算定式黑白()
     this.折花处理()
     this.吞噬DOT()
     this.流离减CD()
     this.钟灵()
     this.丹青()
+    this.青歌()
     this.橙武判定()
     this.流离判定()
     this.墨意变化(玉石俱焚.获得墨意 + 玉石俱焚.本次释放墨意变化)
     this.触发伤害行为('玉石俱焚')
     this.保存释放记录('玉石俱焚')
     this.涓流函数()
+  }
+
+  结算定式黑白() {
+    const DOT种类 = 玉石俱焚.引爆总种类
+    if (DOT种类) {
+      const 定式黑白引爆次数 = 定式黑白实例.触发定式黑白(DOT种类 + 1, this.模拟循环.当前时间)
+      玉石俱焚.定式黑白引爆次数 += DOT种类 + 1
+      this.触发伤害行为('碎玉', 定式黑白引爆次数, [])
+    }
   }
 
   橙武刷新DOT() {
@@ -113,7 +126,7 @@ class 玉石俱焚 extends 有CD技能通用类 {
   流离减CD() {
     if (this?.模拟循环?.校验奇穴是否存在('流离')) {
       if (玉石俱焚.引爆总种类) {
-        const 减少CD总帧数 = 玉石俱焚.引爆总种类 * 每秒郭氏帧 * 1
+        const 减少CD总帧数 = 玉石俱焚.引爆总种类 * 每秒郭氏帧 * 1.25
         this.减少调息时间(减少CD总帧数)
       }
     }
@@ -123,6 +136,12 @@ class 玉石俱焚 extends 有CD技能通用类 {
     if (玉石俱焚.引爆总种类) {
       this?.模拟循环?.添加buff({ 名称: '钟灵', 对象: '自身' })
       this?.模拟循环?.添加buff({ 名称: '钟灵瞬发', 对象: '自身' })
+    }
+  }
+
+  青歌() {
+    if (this?.模拟循环?.校验奇穴是否存在('青歌')) {
+      this?.模拟循环?.添加buff({ 名称: '青歌', 对象: '自身' })
     }
   }
 

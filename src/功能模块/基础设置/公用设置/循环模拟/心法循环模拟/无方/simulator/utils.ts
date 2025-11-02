@@ -1,6 +1,7 @@
 import { 每秒郭氏帧 } from '@/数据/常量'
 import 循环模拟技能基础数据, { 原始Buff数据 } from '../constant/skill'
-import { 循环基础技能数据类型 } from './type'
+import { DotDTO, 循环基础技能数据类型 } from './type'
+import { 基础GCD帧 } from '../constant'
 
 export const 根据奇穴修改buff数据 = (奇穴: string[]) => {
   const res = {}
@@ -13,13 +14,24 @@ export const 根据奇穴修改buff数据 = (奇穴: string[]) => {
     let 苍棘缚地最大持续时间 = 每秒郭氏帧 * 8 + 每秒郭氏帧 * 2 + 8
     switch (key) {
       case '苍棘缚地':
-        if (判断奇穴('连茹')) {
+      //  if (判断奇穴('连茹')) {
+      //    苍棘缚地最大持续时间 += 每秒郭氏帧 * 4
+      //  }
+        if (判断奇穴('灵荆')) {
           苍棘缚地最大持续时间 += 每秒郭氏帧 * 4
         }
-        if (判断奇穴('灵荆')) {
-          苍棘缚地最大持续时间 += 每秒郭氏帧 * 2
-        }
         obj.最大持续时间 = 苍棘缚地最大持续时间
+        break
+      case '逆乱':
+        if (判断奇穴('疾根')) {
+          // eslint-disable-next-line @typescript-eslint/no-extra-semi
+          ;(obj as DotDTO).最大作用次数 = 9
+          ;(obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 18
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-extra-semi
+          ;(obj as DotDTO).最大作用次数 = 8
+          ;(obj as DotDTO).最大持续时间 = 每秒郭氏帧 * 16
+        }
         break
       default:
         break
@@ -65,7 +77,7 @@ export const 根据奇穴秘籍修改技能数据 = (奇穴: string[]): 循环�
 
       if (判断奇穴('鸩羽')) {
         最大充能层数 = 2
-        技能原始CD = 每秒郭氏帧 * 9
+        技能原始CD = 每秒郭氏帧 * 8
       }
       return {
         ...技能,

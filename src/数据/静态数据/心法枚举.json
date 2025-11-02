@@ -40,7 +40,7 @@
     "icon": "https://icon.jx3box.com/icon/2376.png"
   },
   "10145": {
-    "name": "问水诀",
+    "name": "山居剑意",
     "icon": "https://icon.jx3box.com/icon/2376.png"
   },
   "10175": {
@@ -166,5 +166,9 @@
   "10626": {
     "name": "灵素",
     "icon": "https://icon.jx3box.com/icon/15593.png"
+  },
+  "10821": {
+    "name": "幽罗引",
+    "icon": "https://icon.jx3box.com/icon/10821.png"
   }
 }

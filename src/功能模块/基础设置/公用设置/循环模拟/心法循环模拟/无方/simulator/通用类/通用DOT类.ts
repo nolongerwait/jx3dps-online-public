@@ -11,6 +11,12 @@ class 通用DOT类 extends 技能统一类 {
     super(模拟循环)
   }
 
+  获取当前DOT层数() {
+    const 当前层数 =
+      this.DOT运行数据?.待生效数据?.[this.DOT运行数据?.待生效数据?.length - 1]?.当前层数 || 0
+    return 当前层数 || 0
+  }
+
   获取当前DOT数据(DOT名称) {
     const DOT数据: DotDTO = this.模拟循环.Buff和Dot数据?.[DOT名称] as DotDTO
     return DOT数据

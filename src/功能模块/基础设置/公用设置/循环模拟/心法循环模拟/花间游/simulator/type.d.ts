@@ -397,4 +397,4 @@ export interface Buff枚举 {
   [key: string]: BuffDTO | DotDTO
 }
 
-export type DOT来源类型 = '芙蓉' | '乱洒' | '玉石'
+export type DOT来源类型 = '芙蓉' | '乱洒' | '玉石' | '乱洒渲青'

@@ -54,6 +54,22 @@ const AddCycleSkillBtn: React.FC<AddCycleSkillBtnProps> = (props) => {
         是否禁用: true,
         异常描述: ERROR_ACTION?.BUFF错误?.信息,
       }
+    } else if (
+      技能?.技能名称 === '没石饮羽' &&
+      !模拟信息?.当前自身buff列表?.['乘黄之威']?.当前层数
+    ) {
+      禁用信息 = {
+        是否禁用: true,
+        异常描述: ERROR_ACTION?.BUFF错误?.信息,
+      }
+    } else if (
+      技能?.技能名称 === '弛风鸣角' &&
+      !模拟信息?.当前自身buff列表?.['乘黄之威']?.当前层数
+    ) {
+      禁用信息 = {
+        是否禁用: true,
+        异常描述: ERROR_ACTION?.BUFF错误?.信息,
+      }
     } else if (技能?.技能名称 === '游雾乘云' && 唤灵印层数 < 校验层数) {
       禁用信息 = {
         是否禁用: true,

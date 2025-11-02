@@ -80,7 +80,7 @@ function 装备部位选择(props: 装备部位选择入参, ref) {
           (item) =>
             (item?.装备品级 >= (装备选择范围?.品级范围?.[0] || 0) &&
               item?.装备品级 <= (装备选择范围?.品级范围?.[1] || 0)) ||
-            (item?.武器伤害_最大值 && item?.装备类型 === '橙武')
+            (部位 === '武器' && item?.装备类型 === '橙武'),
         )
       }
       if (装备选择范围?.词条类型?.length) {
@@ -110,7 +110,7 @@ function 装备部位选择(props: 装备部位选择入参, ref) {
     } else {
       return 装备数据列表
     }
-  }, [装备数据列表, 装备选择范围])
+  }, [装备数据列表, 装备选择范围, 部位])
 
   const 当前镶嵌等级数组 = useMemo(() => {
     return allValue?.镶嵌孔数组?.map((item) => item.镶嵌宝石等级) || []
@@ -131,14 +131,21 @@ function 装备部位选择(props: 装备部位选择入参, ref) {
         .filter((item) => {
           if (获取最佳装备) {
             // CW只和CW对比
-            if (当前装备信息?.装备增益?.大橙武特效 && !!item?.武器伤害_最大值) {
-              return (
-                item?.装备品级 >= (装备选择范围?.品级范围?.[0] || 0) &&
-                item?.装备品级 <= (装备选择范围?.品级范围?.[1] || 0) &&
-                item.装备类型 === '橙武'
-              )
+            if (当前装备信息?.装备增益?.大橙武特效) {
+              if (item?.武器伤害_最大值) {
+                return (
+                  item?.装备品级 >= (装备选择范围?.品级范围?.[0] || 0) &&
+                  item?.装备品级 <= (装备选择范围?.品级范围?.[1] || 0) &&
+                  item.装备类型 === '橙武'
+                )
+              } else {
+                return item.装备品级 >= 18900
+              }
             } else {
-              return item.装备品级 >= 18900 && item.装备类型 !== '橙武'
+              if (item?.武器伤害_最大值) {
+                return item.装备品级 >= 18900 && item.装备类型 !== '橙武'
+              }
+              return item.装备品级 >= 18900
             }
           }
           return item.装备品级 >= 18900 || item.装备类型 === '橙武'
@@ -241,7 +248,7 @@ function 装备部位选择(props: 装备部位选择入参, ref) {
             setDpsUpList([])
           }
         }}
-        listHeight={400}
+        listHeight={500}
         ref={ref}
         filterOption={(input, option) => {
           const findObj = 实际装备列表?.find((item) => item.id === option?.value)
@@ -292,7 +299,7 @@ function 装备部位选择(props: 装备部位选择入参, ref) {
                         'zhuangbei-miaoshu-label',
                         a === '精简' ? 'zhuangbei-miaoshu-label-jingjian' : '',
                         a === '特效' ? 'zhuangbei-miaoshu-label-texiao' : '',
-                        a === 'PVX' ? 'zhuangbei-miaoshu-label-pvx' : ''
+                        a === 'PVX' ? 'zhuangbei-miaoshu-label-pvx' : '',
                       )
 
                       return (

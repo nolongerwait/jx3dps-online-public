@@ -6,12 +6,10 @@ class 逆乱 extends 通用DOT类 {
   }
 
   获得和刷新逆乱() {
-    const 当前最后一跳青逆乱数据 =
-      this?.DOT运行数据?.待生效数据?.[this?.DOT运行数据?.待生效数据?.length - 1] || {}
-    const 当前青逆乱层数 = 当前最后一跳青逆乱数据?.当前层数 || 0
+    const 当前逆乱层数 = this.获取当前DOT层数()
     const 青逆乱最大层数 = this?.模拟循环?.Buff和Dot数据?.逆乱?.最大层数 || 1
     const 添加青逆乱层数 = 1
-    const 新青逆乱层数 = Math.min(当前青逆乱层数 + 添加青逆乱层数, 青逆乱最大层数)
+    const 新青逆乱层数 = Math.min(当前逆乱层数 + 添加青逆乱层数, 青逆乱最大层数)
     const 数据 = this.获取当前DOT数据('逆乱')
     this.更新待生效数据(新青逆乱层数, 数据)
   }

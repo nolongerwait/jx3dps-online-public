@@ -13,6 +13,7 @@ import {
   技能释放记录数据,
   待生效事件,
   技能运行数据类型,
+  角色状态信息类型,
 } from './type'
 
 import 获取当前数据 from '@/数据/数据工具/获取当前数据'
@@ -25,6 +26,7 @@ import 引窍 from './技能类/引窍'
 import 断脉 from './技能类/断脉'
 import 截阳 from './技能类/截阳'
 import 锁神 from './技能类/锁神'
+import 骤风令 from './技能类/骤风令'
 import 一阳化生 from './技能类/一阳化生'
 import 换行 from './技能类/换行'
 import { 团队增益轴类型 } from '@/@types/团队增益'
@@ -45,6 +47,7 @@ interface SimulatorCycleProps {
   启用团队增益快照?: boolean
   团队增益轴?: 团队增益轴类型
   起手Buff配置?: 起手Buff配置
+  起手能量: { 任脉: number; 督脉: number }
 }
 
 class 循环主类 {
@@ -73,6 +76,10 @@ class 循环主类 {
   启用团队增益快照 = false
   团队增益轴: 团队增益轴类型 = {}
   锁神触发次数 = 0
+  角色状态信息: 角色状态信息类型 = {
+    能量信息: { 任脉: 100, 督脉: 100 },
+  }
+
 
   // 初始化创建
   constructor(props: SimulatorCycleProps) {
@@ -98,6 +105,9 @@ class 循环主类 {
     this.当前目标buff列表 = { ...获取起手Buff配置(props?.起手Buff配置, this.Buff和Dot数据, '目标') }
     this.锁神触发次数 = 0
     this.开启武学助手 = props.开启武学助手
+    this.角色状态信息 = {
+      能量信息: { 任脉: props?.起手能量?.任脉, 督脉: props?.起手能量?.督脉 },
+    }
     this.重置循环执行结果()
   }
 
@@ -113,6 +123,7 @@ class 循环主类 {
       引窍: new 引窍(this),
       断脉: new 断脉(this),
       截阳: new 截阳(this),
+      骤风令: new 骤风令(this),
       锁神: new 锁神(this),
       一阳化生: new 一阳化生(this),
       换行: new 换行(this),
@@ -617,6 +628,11 @@ class 循环主类 {
             if (技能实例) {
               技能实例?.读条结束后?.()
             }
+          } else if (当前事件.事件名称?.includes('大招')) {
+            const 技能实例 = this.技能类实例集合[当前事件?.事件备注?.技能名称]
+            if (技能实例) {
+              技能实例?.大招结算后续?.(当前事件?.事件备注?.当前次数)
+            }
           }
           this.待生效事件队列?.shift()
           if (this.待生效事件队列.length) {
@@ -727,20 +743,20 @@ class 循环主类 {
   获取当前各技能的运行状态() {
     const 各技能当前运行状态 = {}
 
-    ;(Object.keys(this.技能类实例集合) || []).forEach((key) => {
-      各技能当前运行状态[key] = this.技能类实例集合[key]?.技能运行数据 || {}
-    })
+      ; (Object.keys(this.技能类实例集合) || []).forEach((key) => {
+        各技能当前运行状态[key] = this.技能类实例集合[key]?.技能运行数据 || {}
+      })
 
     return 各技能当前运行状态
   }
 
   获取各DOT的运行状态() {
     const DOT运行数据 = {}
-    ;(Object.keys(this.技能类实例集合) || []).forEach((key) => {
-      if (this.技能类实例集合[key]?.DOT运行数据) {
-        DOT运行数据[key] = this.技能类实例集合[key]?.DOT运行数据 || {}
-      }
-    })
+      ; (Object.keys(this.技能类实例集合) || []).forEach((key) => {
+        if (this.技能类实例集合[key]?.DOT运行数据) {
+          DOT运行数据[key] = this.技能类实例集合[key]?.DOT运行数据 || {}
+        }
+      })
     return DOT运行数据
   }
 }

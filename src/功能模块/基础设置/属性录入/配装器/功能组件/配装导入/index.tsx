@@ -5,10 +5,12 @@ import Jx3BoxImport from './Jx3BoxImport'
 import AccountImport from './AccountImport'
 import JCL装备导入 from './JCL装备导入'
 import 配装器装备导入 from './配装器装备导入'
+import Generator装备导入 from './Generator装备导入'
 import './index.css'
+import MYImport from './MYImport'
 
-function 魔盒配装方案导入({ visible, onClose, onOk }) {
-  const [active, setActive] = useState('account')
+function 配装方案导入({ visible, onClose, onOk }) {
+  const [active, setActive] = useState('my')
 
   const beforeClose = () => {
     onClose()
@@ -20,18 +22,22 @@ function 魔盒配装方案导入({ visible, onClose, onOk }) {
   }
 
   const items = [
+    { label: '插件导入', key: 'my' },
     { label: '角色导入', key: 'account' },
     { label: '魔盒导入', key: 'jx3box' },
     { label: 'JCL导入', key: 'jcl' },
     { label: '配装器导入', key: 'jx3dps' },
+    { label: 'Generator', key: 'Generator' },
   ]
 
   const CycleComponent = useMemo(() => {
     const CycleMap = {
       jx3box: <Jx3BoxImport onOk={beforeOk} />,
       account: <AccountImport onOk={beforeOk} />,
+      my: <MYImport onOk={beforeOk} />,
       jcl: <JCL装备导入 onOk={beforeOk} />,
       jx3dps: <配装器装备导入 onOk={beforeOk} />,
+      Generator: <Generator装备导入 onOk={beforeOk} />,
     }
     return visible ? CycleMap[active] || <></> : null
   }, [active, visible, beforeOk])
@@ -55,4 +61,4 @@ function 魔盒配装方案导入({ visible, onClose, onOk }) {
   )
 }
 
-export default 魔盒配装方案导入
+export default 配装方案导入

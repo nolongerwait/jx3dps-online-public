@@ -89,6 +89,9 @@ export interface DOT运行数据类型 {
   待生效数据: DOT待生效数据类型[]
 }
 
+export interface DOT列表 {
+  [key: string]: DOT运行数据类型
+}
 export interface DOT待生效数据类型 {
   当前层数?: number
   生效时间?: number
@@ -267,7 +270,7 @@ export interface BuffDTO {
   /**
    * 图标
    */
-  图标?: string
+  备注?: string
 }
 
 // 用来显示的循环技能类型类型
@@ -363,6 +366,7 @@ export interface 模拟信息类型 {
   角色状态信息: 角色状态信息类型
   当前自身buff列表: Buff枚举
   当前目标buff列表: Buff枚举
+  当前DOT运行状态: { [key: string]: DOT运行数据类型 }
   当前时间: number
   循环执行结果: '成功' | '异常'
   循环异常信息: { 异常索引?: number; 异常信息?: any }

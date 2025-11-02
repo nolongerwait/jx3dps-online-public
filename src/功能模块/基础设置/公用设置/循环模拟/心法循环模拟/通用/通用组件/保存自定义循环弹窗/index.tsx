@@ -51,7 +51,7 @@ function 保存自定义循环弹窗(props: 保存自定义循环弹窗类型) {
     额外配置信息 = {},
   } = props
 
-  const { 秘籍信息 } = useContext(CycleSimulatorContext)
+  const { 秘籍信息, 起手Buff配置 } = useContext(CycleSimulatorContext)
 
   // 保存加速序列
   const [延迟选项, 设置延迟选项] = useState<number[]>([0, 1, 2])
@@ -188,7 +188,7 @@ function 保存自定义循环弹窗(props: 保存自定义循环弹窗类型) {
           .map((item) => {
             return `[加速：${item.加速值}，延迟：${item.延迟}]`
           })
-          .join('、')}`
+          .join('、')}`,
       )
     }
 
@@ -208,6 +208,7 @@ function 保存自定义循环弹窗(props: 保存自定义循环弹窗类型) {
       秘籍: 秘籍信息,
       技能序列: 技能序列名称,
       额外配置信息: 额外配置信息 || {},
+      起手Buff配置: 起手Buff配置 || {},
     }
 
     const 新自定义循环 = 自定义循环列表?.some((item) => item?.名称 === 名称)

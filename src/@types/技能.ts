@@ -217,6 +217,28 @@ export interface 技能增益列表类型 {
    * @name 快照类型
    */
   快照类型?: 快照类型
+  /**
+   * @name BuffId
+   */
+  BuffId?: number
+  /**
+   * @name Buff等级
+   */
+  Buff等级?: number
+  /**
+   * @name Buff层数
+   */
+  Buff层数?: number
+  /**
+   * @name RecipeId
+   */
+  RecipeId?: number
+  /**
+   * @name 增益计算位置
+   * @description 用于解析Generator时，给快照技能的current判断是否需要此增益
+   *本质为，目标类型增益不会呗快照
+   */
+  增益计算位置?: '目标' | '自身'
 }
 
 export type 快照类型 =

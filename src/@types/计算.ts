@@ -154,6 +154,7 @@ export interface 技能增伤类型 {
   易伤增伤: number
   非侠增伤: number
   最终增伤: number
+  职业最终增伤: number
   系数增伤: number // 这里的系数增伤直接修改系数，不乘在最后
   系数置换函数?: (level: number) => number
 }

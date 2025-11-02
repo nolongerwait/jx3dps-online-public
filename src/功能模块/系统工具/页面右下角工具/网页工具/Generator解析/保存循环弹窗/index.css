@@ -1,0 +1,45 @@
+.jcl-import-cycle-save-modal .ant-modal-body {
+  padding-top: 16px;
+}
+
+.jcl-import-cycle-save-modal-content .ant-tabs-content-holder {
+  min-height: 56px;
+}
+
+.jcl-import-cycle-save-modal-content .ant-select {
+  width: 100%;
+}
+
+.jcl-import-cycle-save-label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.jcl-import-cycle-save-delete {
+  color: var(--ant-primary-color);
+  cursor: pointer;
+}
+
+.jcl-import-cycle-save-delete:hover {
+  color: var(--ant-primary-color-hover);
+  text-decoration: underline;
+}
+
+.jcl-import-cycle-save-checkbox p {
+  font-size: 16px;
+  color: var(--ant-primary-color-hover);
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 12px;
+  /* padding-top: 16px; */
+}
+
+.jcl-import-cycle-save-checkbox .ant-checkbox-group {
+  margin-bottom: 12px;
+}
+
+.jcl-import-cycle-save-checkbox {
+  margin-bottom: 4px;
+}

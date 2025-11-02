@@ -58,7 +58,7 @@ function CycleModalHeader(props: CycleModalHeaderProps) {
     快速导入默认循环 = [],
   } = props
 
-  const { 秘籍信息, 更新秘籍信息 } = useContext(CycleSimulatorContext)
+  const { 秘籍信息, 更新秘籍信息, 更新起手Buff配置 } = useContext(CycleSimulatorContext)
 
   const 自定义循环 = useAppSelector((state) => state?.data?.自定义循环列表)
 
@@ -73,7 +73,7 @@ function CycleModalHeader(props: CycleModalHeaderProps) {
       .map((item) => {
         const 实际技能数据 = 获取实际技能数据(item)
         const 技能信息 = 模拟信息?.技能基础数据?.find(
-          (a) => a?.技能名称 === 实际技能数据?.实际技能名称
+          (a) => a?.技能名称 === 实际技能数据?.实际技能名称,
         ) as 循环基础技能数据类型
         return {
           ...技能信息,
@@ -93,6 +93,9 @@ function CycleModalHeader(props: CycleModalHeaderProps) {
     if (当前循环数据?.秘籍) {
       更新秘籍信息?.(当前循环数据?.秘籍)
     }
+    if (当前循环数据?.起手Buff配置) {
+      更新起手Buff配置?.(当前循环数据?.起手Buff配置)
+    }
   }
 
   const 粘贴导入 = () => {
@@ -105,7 +108,7 @@ function CycleModalHeader(props: CycleModalHeaderProps) {
           .map((item) => {
             const 实际技能数据 = 获取实际技能数据(item)
             const 技能信息 = 模拟信息?.技能基础数据?.find(
-              (a) => a?.技能名称 === 实际技能数据?.实际技能名称
+              (a) => a?.技能名称 === 实际技能数据?.实际技能名称,
             ) as 循环基础技能数据类型
             return {
               ...技能信息,

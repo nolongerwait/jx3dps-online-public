@@ -16,6 +16,7 @@ class 溟海御波 extends 有CD技能通用类 {
     this.溟海御波造成伤害()
     this.清源判定()
     this.澄穆判定()
+    this.引爆青冥('溟海御波')
     const 海碧判定通过 = this.海碧判定()
     if (海碧判定通过) {
       溟海御波.释放重置 = true

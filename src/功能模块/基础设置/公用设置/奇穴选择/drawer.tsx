@@ -4,21 +4,30 @@ import { useAppDispatch, useAppSelector } from '@/hooks'
 import { 更新方案数据 } from '@/store/data'
 import 获取当前数据 from '@/数据/数据工具/获取当前数据'
 import { 触发秒伤计算 } from '@/计算模块/计算函数'
+import 混池奇穴 from './混池奇穴'
 import './index.css'
 
 const { 奇穴数据 = [] } = 获取当前数据()
 
+const 兜底图片 = 'https://icon.jx3box.com/icon/13.png'
+
 const 奇穴选择抽屉: React.FC<any> = (props?: any) => {
-  const { value, onChange, open, onClose } = props || {}
+  const { value, onChange, open, onClose, ...rest } = props || {}
   const [form] = Form.useForm()
 
   const dispatch = useAppDispatch()
   const 当前奇穴信息 = value ? value : useAppSelector((state) => state?.data?.当前奇穴信息)
 
   const handleChangeQixue = (_, values) => {
-    const newArray = Object.keys(values).map((key) => {
-      return values[key]
-    })
+    const newArray = Object.keys(values)
+      ?.filter((key, index) => key !== 'mix' && index < 8)
+      .map((key) => {
+        return values[key]
+      })
+
+    if (values?.mix) {
+      newArray.push(...(values?.mix || []))
+    }
 
     if (onChange) {
       onChange(newArray)
@@ -31,11 +40,17 @@ const 奇穴选择抽屉: React.FC<any> = (props?: any) => {
   // 监听表单变化
   useEffect(() => {
     const obj = {}
+    const misList: string[] = []
     当前奇穴信息?.forEach((item, index) => {
-      obj[index] = item
+      if (index >= 7) {
+        misList.push(item)
+      } else {
+        obj[index] = item
+      }
     })
     form?.setFieldsValue({
       ...obj,
+      mix: misList,
     })
   }, [当前奇穴信息, form])
 
@@ -52,6 +67,7 @@ const 奇穴选择抽屉: React.FC<any> = (props?: any) => {
       placement='bottom'
       height={200}
       className={'qixue-set-drawer'}
+      {...rest}
     >
       <Form
         onValuesChange={handleChangeQixue}
@@ -61,16 +77,27 @@ const 奇穴选择抽屉: React.FC<any> = (props?: any) => {
         }`}
       >
         {奇穴数据.map((重, index) => {
-          return (
-            <Form.Item className={'qixue-set-item'} name={index} key={index + 1}>
+          return 重?.是否为混池 ? (
+            <Form.Item className={'qixue-set-item'} name={'mix'} key='fix_1'>
+              <混池奇穴 />
+            </Form.Item>
+          ) : (
+            <Form.Item
+              className={'qixue-set-item'}
+              style={index === 0 || index === 6 ? { marginRight: 24 } : {}}
+              name={index}
+              key={index + 1}
+            >
               <Select
                 className={'qixue-set-item-select'}
                 disabled={重?.是否不可编辑}
                 // onChange={handleChangeQixue}
-                dropdownMatchSelectWidth={false}
+                popupMatchSelectWidth={false}
                 optionLabelProp='label'
-                showArrow={false}
-                popupClassName={'qixue-set-item-select-popup'}
+                // showArrow={false}
+                classNames={{
+                  popup: { root: 'qixue-set-item-select-popup' },
+                }}
               >
                 {重?.奇穴列表.map((奇穴) => {
                   return (
@@ -81,13 +108,16 @@ const 奇穴选择抽屉: React.FC<any> = (props?: any) => {
                       className={'qixue-set-item-select-option'}
                       label={
                         <div className={'qixue-label'}>
-                          <img className={'qixue-label-img'} src={奇穴?.奇穴图片} />
+                          <img className={'qixue-label-img'} src={奇穴?.奇穴图片 || 兜底图片} />
                           <span className={'qixue-label-text'}>{奇穴?.奇穴名称}</span>
                         </div>
                       }
                     >
                       <div className='qixue-set-item-select-img-wrap'>
-                        <img className={'qixue-set-item-select-img'} src={奇穴?.奇穴图片} />
+                        <img
+                          className={'qixue-set-item-select-img'}
+                          src={奇穴?.奇穴图片 || 兜底图片}
+                        />
                       </div>
                       <Tooltip title={奇穴?.奇穴描述 || ''} placement='right'>
                         <span className={'qixue-set-item-select-text'}>{奇穴?.奇穴名称}</span>

@@ -18,6 +18,7 @@ interface SimulatorCycleProps {
   启用团队增益快照?: boolean
   团队增益轴?: 团队增益轴类型
   起手Buff配置?: 起手Buff配置
+  起手能量: { 任脉: number; 督脉: number }
 }
 
 const 模拟循环 = (props: SimulatorCycleProps) => {
@@ -41,6 +42,7 @@ const 模拟循环 = (props: SimulatorCycleProps) => {
     当前DOT运行状态,
     当前GCD组: 模拟实例.GCD组,
     技能基础数据: 模拟实例.技能基础数据,
+    角色状态信息: 模拟实例.角色状态信息,
   }
 }
 

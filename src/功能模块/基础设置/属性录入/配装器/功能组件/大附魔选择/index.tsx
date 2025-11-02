@@ -27,7 +27,7 @@ const 大附魔选择: ForwardRefExoticComponent<大附魔选择类型> = forwar
       {
         label: `英雄·${type}`,
         value: 2,
-        iconId: '23950',
+        iconId: '23950', // TODO 魔盒未更新英雄的图标
       },
       {
         label: `普通·${type}`,

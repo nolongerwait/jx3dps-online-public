@@ -69,12 +69,27 @@ function CycleSimulator() {
     当前各技能运行状态: {},
     当前DOT运行状态: {},
     当前GCD组: {},
+    角色状态信息: {
+      能量信息: { 任脉: 100, 督脉: 100 },
+    },
+  })
+
+  const [起手能量, 更新起手能量] = useState<{ 任脉: number; 督脉: number }>({
+    任脉: 100,
+    督脉: 100,
   })
 
   const 团队增益轴 = useAppSelector((state) => state?.data?.团队增益轴)
   // 是否开启武学助手
   const [开启武学助手, 设置开启武学助手] = useState<boolean>(false)
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (模拟器弹窗展示) {
+      // 设置外面选择的默认奇穴信息
+      更新起手能量({ 任脉: 100, 督脉: 100 })
+    }
+  }, [模拟器弹窗展示])
 
   useEffect(() => {
     if (模拟器弹窗展示) {
@@ -107,6 +122,7 @@ function CycleSimulator() {
       奇穴: 奇穴 || 奇穴信息,
       大橙武模拟,
       开启武学助手,
+      起手能量,
       启用团队增益快照,
       团队增益轴,
       起手Buff配置,
@@ -195,7 +211,7 @@ function CycleSimulator() {
     let start = 0
     for (let i = 0; i < cycle.length; i++) {
       if (
-        ['换行', '截阳'].includes(cycle[i]?.技能名称) ||
+        ['换行'].includes(cycle[i]?.技能名称) ||
         i === cycle.length - 1
       ) {
         res.push([

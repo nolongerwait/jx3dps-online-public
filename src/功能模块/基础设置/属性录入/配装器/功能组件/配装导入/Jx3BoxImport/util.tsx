@@ -1,7 +1,7 @@
 import { 属性简写枚举 } from '@/@types/枚举'
 import { 装备位置部位枚举 } from '@/@types/装备'
 import 获取当前数据 from '@/数据/数据工具/获取当前数据'
-import { 五彩石转换 } from '../AccountImport/util'
+import { 五彩石转换 } from '../统一映射枚举'
 
 const { 附魔, 功法 } = 获取当前数据()
 
@@ -19,9 +19,7 @@ export const getEquipData = (data) => {
         const 附魔属性 = basicData?.enhance?.Attribute1ID
         const 附魔值 = basicData?.enhance?.Attribute1Value1
 
-        const 附魔数据判断 = 附魔?.find(
-          (item) => item?.附魔名称 === `${附魔属性}+${附魔值}`
-        )
+        const 附魔数据判断 = 附魔?.find((item) => item?.附魔名称 === `${附魔属性}+${附魔值}`)
         if (!属性简写枚举[附魔属性]) {
           console.warn(`存在计算器未内置附魔${附魔属性}${附魔值}`)
         }
@@ -30,9 +28,7 @@ export const getEquipData = (data) => {
           属性简写枚举[附魔属性] &&
           !['atDecriticalDamageBase', 'atToughnessBase'].includes(附魔属性)
         ) {
-          console.warn(
-            `存在计算器未内置附魔${附魔属性}${附魔值}，已跳过。不影响导入。`
-          )
+          console.warn(`存在计算器未内置附魔${附魔属性}${附魔值}，已跳过。不影响导入。`)
         }
         equip[EquipPositionMap[item]] = {
           当前精炼等级: basicData?.strength,
@@ -49,9 +45,7 @@ export const getEquipData = (data) => {
             }
           }),
           附魔:
-            属性简写枚举[附魔属性] && 附魔值
-              ? `${属性简写枚举[附魔属性]}+${附魔值}`
-              : undefined,
+            属性简写枚举[附魔属性] && 附魔值 ? `${属性简写枚举[附魔属性]}+${附魔值}` : undefined,
         }
 
         // 判断大附魔

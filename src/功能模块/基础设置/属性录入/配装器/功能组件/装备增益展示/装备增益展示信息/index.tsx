@@ -16,8 +16,17 @@ function 装备增益展示信息({ 增益类型 }: { 增益类型: string }) {
       case '试炼项链会心':
       case '试炼鞋子会心':
       case '试炼腰坠会效':
-        // newStr = 增益类型?.replace('精简', '')
-        return ''
+        return 增益类型?.replace('试炼', '')
+      // case '特效_40788':
+      // case '特效_40790':
+      // case '特效_40791':
+      // case '特效_40793':
+      // case '特效_40794':
+      // case '特效_40802':
+      // case '特效_40803':
+      // case '特效_40804':
+      // case '特效_42767':
+      //   return '副本黄字'
       case '大橙武特效':
         return '大橙武'
       case '小橙武特效':

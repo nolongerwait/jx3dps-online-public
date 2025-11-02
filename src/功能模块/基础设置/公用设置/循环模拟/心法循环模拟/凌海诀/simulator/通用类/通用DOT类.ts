@@ -122,7 +122,7 @@ class 通用DOT类 extends 技能统一类 {
           事件备注: { buff名称: DOT数据?.名称, buff对象: '目标', 卸除层数: 9999 },
         },
       ],
-      true
+      true,
     )
   }
 

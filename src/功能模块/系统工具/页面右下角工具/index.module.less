@@ -1,0 +1,32 @@
+.floatBtnGroup {
+  :global {
+    .ant-float-btn-group-trigger {
+      margin-left: 60px;
+    }
+  }
+}
+.floatBtn {
+  width: 100px !important;
+  :global {
+    .ant-float-btn-icon {
+      color: var(--ant-primary-color) !important;
+    }
+    .ant-float-btn-body {
+      width: 92px !important;
+      height: 24px !important;
+      justify-content: center;
+      .ant-float-btn-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 24px;
+        min-height: 24px;
+        flex-direction: row;
+        .ant-float-btn-icon {
+          margin: 0 8px 0 0;
+        }
+      }
+    }
+  }
+}

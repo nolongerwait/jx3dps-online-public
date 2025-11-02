@@ -112,7 +112,8 @@ export enum 属性类型 {
   目标移动状增伤 = 'atSkillDamageDstMoveStateAdd',
   通用增伤 = 'atSkillDamageCommonAdd', // atAllDamageAddPercent
   易伤增伤 = 'atSkillDamageFragileAdd',
-  最终增伤 = 'atActivityDamageFinalCof',
+  最终增伤 = 'atActivityDamageFinalCof', // 非侠等
+  职业最终增伤 = 'atSkillDamageFinalCof', // 职业内使用
   非侠增伤 = 'atSkillDamageNPCAdd',
   系数增伤 = 'atSkillCoefficientAdd',
   系数置换函数 = 'atSkillCoefficientReplace',

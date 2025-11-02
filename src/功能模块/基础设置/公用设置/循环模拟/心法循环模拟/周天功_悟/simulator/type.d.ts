@@ -41,6 +41,15 @@ export interface 技能类类型 {
   释放后?: () => void
 }
 
+export interface 角色状态信息类型 {
+  能量信息: 能量信息类型
+}
+
+export interface 能量信息类型 {
+  任脉: number
+  督脉: number
+}
+
 export interface 技能类实例集合 {
   风流云散?: 风流云散类型
   一阳化生?: 一阳化生类型
@@ -49,6 +58,7 @@ export interface 技能类实例集合 {
   断脉?: 断脉类型
   截阳?: 截阳类型
   锁神?: 锁神类型
+  骤风令?: 骤风令类型
   换行?: any
   特效腰坠?: any
 }
@@ -104,7 +114,7 @@ export interface 循环基础技能数据类型 {
   /**
    * @name 技能类型
    */
-  技能类型: '傍身' | '对阵' | '绝技' | '轻功'
+  技能类型: '傍身' | '对阵' | '其他' | '轻功'
   /**
    * 充能层数
    */
@@ -350,6 +360,7 @@ export type 日志类型 =
   | '循环异常'
 
 export interface 模拟信息类型 {
+  角色状态信息: 角色状态信息类型
   当前自身buff列表: Buff枚举
   当前目标buff列表: Buff枚举
   当前时间: number
