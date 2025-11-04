@@ -12,11 +12,7 @@ import { INT } from '@/工具函数/help'
 export const 获取逐云寒蕊真实伤害 = (技能等级: number, 最终计算属性: 最终计算属性类型): number => {
   // 体服飘黄装分判定是写死的
   const 装分 = 最终计算属性?.最终人物属性?.装分 || 0
-  const 基础伤害 =
-    // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
-    (4.5332139409685934 * 装分 * 装分) / Math.pow(10, 9) +
-    0.012353329087952482 * 装分 -
-    1707.7143246673932
+  const 基础伤害 = 0.0080170644 * 装分 - 1388.323959
 
   const 最终基础伤害 = Math.max(1300, 基础伤害)
   const 最终计算层数 = Math.max(技能等级, 1)

@@ -91,6 +91,7 @@ export enum 属性类型 {
   通用增伤 = 'atSkillDamageCommonAdd', // atAllDamageAddPercent
   易伤增伤 = 'atSkillDamageFragileAdd',
   最终增伤 = 'atActivityDamageFinalCof',
+  职业最终增伤 = 'atSkillDamageFinalCof',
   非侠增伤 = 'atSkillDamageNPCAdd',
   系数增伤 = 'atSkillCoefficientAdd',
   系数置换函数 = 'atSkillCoefficientReplace',

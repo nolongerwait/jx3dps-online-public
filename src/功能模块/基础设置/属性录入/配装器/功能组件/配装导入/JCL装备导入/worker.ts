@@ -1,7 +1,8 @@
 // import 心法枚举JSON from '../../../../../../..//数据/静态数据/心法枚举.json'
 import { 大附魔ID } from '@/数据/常量/装备常量'
 import { parse_lua } from '../../../../../../../工具函数/lua'
-import 附魔ID枚举 from '../../../../../../../数据/附魔/id_map'
+import 附魔ID枚举 from '../../../../../../../数据/常量/附魔映射'
+import { EquipPositionMap, JCLEquipPositionMap, DaFuMoMap } from '../统一映射枚举'
 
 self.onmessage = (event) => {
   const { data } = event // 获取传入的数据
@@ -76,42 +77,4 @@ export const JCL技能序列导入 = (原序列: string) => {
     console.error(e)
     return []
   }
-}
-
-const JCLEquipPositionMap = {
-  2: '暗器',
-  3: '衣服',
-  4: '帽子',
-  5: '项链',
-  6: '戒指',
-  7: '戒指_2',
-  8: '腰带',
-  9: '腰坠',
-  10: '下装',
-  11: '鞋子',
-  12: '护腕',
-  0: '武器',
-}
-
-const EquipPositionMap = {
-  帽子: '_1',
-  衣服: '_2',
-  腰带: '_3',
-  护腕: '_4',
-  下装: '_5',
-  鞋子: '_6',
-  项链: '_7',
-  腰坠: '_8',
-  戒指: '_9',
-  戒指_2: '_10',
-  暗器: '_11',
-  武器: '_12',
-}
-
-const DaFuMoMap = {
-  帽子: '大附魔_伤帽',
-  衣服: '大附魔_伤衣',
-  腰带: '大附魔_伤腰',
-  护腕: '大附魔_伤腕',
-  鞋子: '大附魔_伤鞋',
 }

@@ -58,7 +58,7 @@ function CycleSkillItem(props: CycleSkillItemProps) {
     if (技能释放结果?.造成buff数据?.buff名称) {
       更新buff覆盖数据(
         [技能释放结果?.造成buff数据?.buff开始时间, 技能释放结果?.造成buff数据?.buff结束时间],
-        技能索引
+        技能索引,
       )
     }
   }
@@ -85,7 +85,7 @@ function CycleSkillItem(props: CycleSkillItemProps) {
   const cls = classNames(
     styles.skill,
     是否异常 ? styles.error : '',
-    当前是否需要高亮展示在buff覆盖中 ? styles.highlight : ''
+    当前是否需要高亮展示在buff覆盖中 ? styles.highlight : '',
   )
 
   const 图标 = useMemo(() => {
@@ -187,7 +187,9 @@ function CycleSkillItem(props: CycleSkillItemProps) {
             onClick={() => 删除循环技能(技能?.index || 0)}
           />
           {技能释放结果?.伤害段数 ? (
-            <span className={`${styles.count} ${styles[`count${技能释放结果?.伤害段数}`]}`}>
+            <span
+              className={`${styles.count} ${styles[`count${技能释放结果?.伤害段数}`]} ${`damage-count${技能释放结果?.伤害段数}`}`}
+            >
               {技能释放结果?.伤害段数}
             </span>
           ) : null}

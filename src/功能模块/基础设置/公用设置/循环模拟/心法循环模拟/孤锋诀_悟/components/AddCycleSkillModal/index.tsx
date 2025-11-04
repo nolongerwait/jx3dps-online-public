@@ -47,6 +47,7 @@ function AddCycleSkillModal(props: AddCycleSkillModalProps) {
         处理循环结果对象={处理循环结果对象}
         模拟信息={模拟信息}
         大橙武模拟={大橙武模拟}
+        插入技能
       />
     </Drawer>
   )

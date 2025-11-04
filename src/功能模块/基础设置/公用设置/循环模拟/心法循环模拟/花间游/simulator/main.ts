@@ -37,6 +37,7 @@ import 墨海临源 from './技能类/墨海临源'
 import 玉石俱焚 from './技能类/玉石俱焚'
 import 丹青 from './技能类/丹青'
 import 删除丹青 from './技能类/删除丹青'
+import { 定式黑白实例 } from './定式黑白'
 
 import DOT_商阳指 from './DOT类/商阳指'
 import DOT_兰摧玉折 from './DOT类/兰摧玉折'
@@ -748,6 +749,7 @@ class 循环主类 {
   // 其他调用函数，供外层调用
   // 模拟函数，一个技能的释放生命周期
   模拟() {
+    定式黑白实例.reset()
     for (let i = 0; i < this.测试循环.length; i++) {
       this.本轮模拟开始前()
       let 实际技能名称 = this.测试循环[i]

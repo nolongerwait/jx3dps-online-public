@@ -11,9 +11,9 @@ const 装备来源: React.FC<装备来源类型> = (props) => {
   const { 装备数据 } = props
 
   const 装备特效展示 = useMemo(() => {
-    const 该装备特效 =
-      装备数据?.装备特效 &&
-      获取装备特效展示信息(装备数据?.装备特效, 装备数据?.装备品级)
+    const 该装备特效 = 装备数据?.装备特效
+      ? 获取装备特效展示信息(装备数据?.装备特效, 装备数据?.装备品级, 装备数据?.特效等级)
+      : null
     return 该装备特效
       ?.replaceAll('【', `<span class="${styles.equipmentHighlight}">`)
       .replaceAll('】', '</span>')
@@ -22,10 +22,7 @@ const 装备来源: React.FC<装备来源类型> = (props) => {
   return 装备数据?.装备特效 && 装备特效展示 ? (
     <div className={styles.feature}>
       <h1 className={styles.title}>特效</h1>
-      <div
-        className={styles.featureWrapper}
-        dangerouslySetInnerHTML={{ __html: 装备特效展示 }}
-      />
+      <div className={styles.featureWrapper} dangerouslySetInnerHTML={{ __html: 装备特效展示 }} />
     </div>
   ) : null
 }

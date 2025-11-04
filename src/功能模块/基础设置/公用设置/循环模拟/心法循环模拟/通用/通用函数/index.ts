@@ -47,7 +47,7 @@ export const 判断有无橙武循环数据 = (循环, 大橙武启用) => {
 export const 获取起手Buff配置 = (
   起手Buff配置: 起手Buff配置 | undefined,
   Buff和Dot数据,
-  类型: string
+  类型: string,
 ) => {
   if (起手Buff配置) {
     const obj = {}
@@ -98,6 +98,24 @@ export const 判断秘籍减读条 = (技能名称: string, 秘籍: 选中秘籍
       }
     })
     return 总CD减少
+  } else {
+    return 0
+  }
+}
+
+export const 秘籍加持续时间 = (技能名称: string, 秘籍?: 选中秘籍信息): number => {
+  const 该技能秘籍 = 秘籍?.[技能名称]
+  if (该技能秘籍) {
+    let 总时间增加 = 0
+    该技能秘籍.forEach((item) => {
+      if (item?.includes('加时间')) {
+        const 实际增加秒 = Number(item?.split('_')?.[1])
+        if (实际增加秒 && !isNaN(实际增加秒)) {
+          总时间增加 += 每秒郭氏帧 * 实际增加秒
+        }
+      }
+    })
+    return 总时间增加
   } else {
     return 0
   }

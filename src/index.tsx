@@ -73,14 +73,12 @@ if (isLocalBuild) {
         <Route
           path='/haste'
           element={
-            <ProtectedRoute>
-              <Suspense fallback={<FullLoading />}>
-                <Haste />
-              </Suspense>
-            </ProtectedRoute>
+            <Suspense fallback={<FullLoading />}>
+              <Haste />
+            </Suspense>
           }
         />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter>,
   )
 }

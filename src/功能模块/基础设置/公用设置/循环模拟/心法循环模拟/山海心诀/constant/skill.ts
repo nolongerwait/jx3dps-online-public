@@ -5,6 +5,8 @@ import { 每秒郭氏帧 } from '@/数据/常量'
 import yinfenghuanling from '../assets/Skill/yinfenghuanling.png'
 import chilvzhaoye from '../assets/Skill/chilvzhaoye.png'
 import jinfengcu from '../assets/Skill/jinfengcu.png'
+import chifengmingjiao from '../assets/Skill/chifengmingjiao.png'
+import moshiyinyu from '../assets/Skill/moshiyinyu.png'
 import yinyucu from '../assets/Skill/yinyucu.png'
 import baiyuliuxing from '../assets/Skill/baiyuliuxing.png'
 import chaoyiwanhui from '../assets/Skill/chaoyiwanhui.png'
@@ -70,12 +72,33 @@ const 循环模拟技能基础数据: 循环基础技能数据类型[] = [
   {
     技能名称: '白羽流星',
     技能释放后添加GCD: 基础GCD帧,
-    技能CD: 每秒郭氏帧 * 5,
+    技能CD: 每秒郭氏帧 * 4.5,
     技能GCD组: '公共',
     技能类型: '箭系',
     // 消耗箭数: 3,
     图标: baiyuliuxing,
     技能原始名称: '白羽流星',
+  },
+  {
+    技能名称: '弛风鸣角',
+    技能释放后添加GCD: 基础GCD帧,
+    技能GCD组: '公共',
+    技能类型: '箭系',
+    图标: chifengmingjiao,
+    技能原始名称: '灼心弛风',
+    显示类型: '奇穴技能',
+    依赖奇穴名: '灼心',
+  },
+  {
+    技能名称: '没石饮羽',
+    技能释放后添加GCD: 基础GCD帧,
+    技能GCD组: '公共',
+    技能类型: '箭系',
+    消耗箭数: 3,
+    图标: moshiyinyu,
+    技能原始名称: '灼心没石',
+    显示类型: '奇穴技能',
+    依赖奇穴名: '灼心',
   },
   {
     技能名称: '朝仪万汇',
@@ -220,7 +243,15 @@ export const 原始Buff数据: Buff枚举 = {
     最大层数: 5,
     最大持续时间: 每秒郭氏帧 * 19,
     图标: chengqi,
-    备注: '承契每层使造成伤害提高6%，仇恨值降低8%',
+    备注: '承契每层使造成伤害提高4%，仇恨值降低8%',
+  },
+  乘黄之威: {
+    类型: '自身',
+    名称: '乘黄之威',
+    最大层数: 1,
+    最大持续时间: 每秒郭氏帧 * 9999,
+    图标: 'https://icon.jx3box.com/icon/20273.png',
+    备注: '自身最大气血值降低30%,施展“游雾乘云”、“澄神醒梦”时，获得乘黄之威',
   },
   // Buff
   标鹄: {
@@ -259,7 +290,7 @@ export const 原始Buff数据: Buff枚举 = {
     类型: '自身',
     名称: '橙武',
     最大层数: 1,
-    最大持续时间: 每秒郭氏帧 * 8,
+    最大持续时间: 每秒郭氏帧 * 9,
     图标: zhuangshengxiaomeng,
     备注: '“饮羽簇”无需运功且无调息，“饮羽簇”造成伤害时对目标造成一次额外伤害',
   },
@@ -286,6 +317,14 @@ export const 原始Buff数据: Buff枚举 = {
     最大持续时间: 每秒郭氏帧 * 10,
     图标: 'https://icon.jx3box.com/icon/20297.png',
     备注: '招式内力消耗降低80%，“白羽流星”无调息时间',
+  },
+  连珠: {
+    类型: '目标',
+    名称: '连珠',
+    最大层数: 2,
+    最大持续时间: 每秒郭氏帧 * 19,
+    图标: 'https://icon.jx3box.com/icon/19597.png',
+    备注: '每层“连珠”期间受到自身的“标鹄”提高40%。',
   },
   诸怀: {
     类型: '自身',

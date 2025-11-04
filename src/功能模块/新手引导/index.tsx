@@ -26,6 +26,9 @@ const 新手引导 = () => {
   const tipCount = useRef<number>(0)
 
   const 修改引导步骤 = (e) => {
+    if (当前引导步骤 === 15 && e === 0) {
+      return
+    }
     // 如果点击进入第二步
     if (e === 0) {
       dispatch(切换配装器弹窗显示状态(false))
@@ -149,6 +152,7 @@ const 新手引导 = () => {
         description: (
           <div>
             <p>点击此按钮可以展开/收起增益详情</p>
+            <p style={{ color: 'red' }}>建议你在进行配装时开启增益，避免只当木桩战神</p>
           </div>
         ),
         target: () => document.getElementById('Guide_12') as any,
@@ -174,7 +178,18 @@ const 新手引导 = () => {
         target: () => document.getElementById('Guide_14') as any,
       },
       {
-        title: '15.切换心法',
+        title: '15.更多工具',
+        description: (
+          <div>
+            <p>在这里你可以找到更多配套的工具</p>
+            <p>更多功能等着你去发现</p>
+          </div>
+        ),
+        target: () => document.getElementById('Guide_15') as any,
+        placement: 'leftTop',
+      },
+      {
+        title: '16.切换心法',
         description: (
           <div>
             <p>最后，如何你想要计算其他心法，可以在这里进行切换</p>
@@ -182,7 +197,7 @@ const 新手引导 = () => {
             <p>在使用中遇到问题，请至魔盒计算器帖下留言反馈</p>
           </div>
         ),
-        target: () => document.getElementById('Guide_15') as any,
+        target: () => document.getElementById('Guide_16') as any,
         placement: 'leftTop',
         nextButtonProps: {
           children: '教程结束',

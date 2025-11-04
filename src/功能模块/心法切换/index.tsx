@@ -16,7 +16,7 @@ function 心法切换() {
     <div className='school-switch'>
       {/* <Dropdown overlay={menu} disabled={新手引导流程状态}> */}
       <img
-        id='Guide_15'
+        id='Guide_16'
         src={当前Logo}
         className='school-switch-img'
         onClick={() => {

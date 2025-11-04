@@ -7,8 +7,7 @@ import 公用设置 from './公用设置'
 import 面板信息 from './面板信息'
 import 属性录入 from './属性录入'
 import 底部配置 from './底部配置'
-
-const 增益面板 = React.lazy(() => import('./增益面板'))
+import 增益面板 from './增益面板'
 
 import './index.css'
 
@@ -31,13 +30,7 @@ function 基础设置() {
         <属性录入 />
         <底部配置 />
       </div>
-      <div className={cls}>
-        {增益面板显示状态 ? (
-          <React.Suspense fallback={null}>
-            <增益面板 />
-          </React.Suspense>
-        ) : null}
-      </div>
+      <div className={cls}>{<增益面板 />}</div>
     </div>
   )
 }

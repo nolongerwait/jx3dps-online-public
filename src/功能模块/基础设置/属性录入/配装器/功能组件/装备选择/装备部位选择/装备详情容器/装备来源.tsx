@@ -38,23 +38,15 @@ const 装备来源: React.FC<装备来源类型> = (props) => {
                     <div className={styles.mapSource}>
                       {item.来源描述?.map((a, i) => {
                         return (
-                          <div
-                            key={`${index}_source_${i}`}
-                            className={styles.mapSourceItem}
-                          >
-                            <h2 className={styles.mapSourceTitle}>
-                              {a?.掉落地图}
-                            </h2>
+                          <div key={`${index}_source_${i}`} className={styles.mapSourceItem}>
+                            <h2 className={styles.mapSourceTitle}>{a?.掉落地图}</h2>
                             <div className={styles.normalSource}>
                               {a.掉落描述
                                 ?.split(',')
                                 ?.filter((a) => a)
                                 ?.map((a) => {
                                   return (
-                                    <Tag
-                                      className={styles.sourceTag}
-                                      key={`${a.掉落描述}_${a}`}
-                                    >
+                                    <Tag className={styles.sourceTag} key={`${a.掉落描述}_${a}`}>
                                       {a}
                                     </Tag>
                                   )
@@ -71,10 +63,7 @@ const 装备来源: React.FC<装备来源类型> = (props) => {
                         ?.filter((a) => a)
                         ?.map((a) => {
                           return (
-                            <Tag
-                              className={styles.sourceTag}
-                              key={`${item.来源描述}_${a}`}
-                            >
+                            <Tag className={styles.sourceTag} key={`${item.来源描述}_${a}`}>
                               {a}
                             </Tag>
                           )

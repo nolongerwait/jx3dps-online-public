@@ -19,8 +19,8 @@ import { QuestionCircleOutlined } from '@ant-design/icons'
 
 const { 装备数据 } = 获取当前数据()
 
-const 英雄品 = [27800, 30700]
-const 普通品 = [24500, 27799]
+const 英雄品 = [30800, 35900]
+const 普通品 = [25200, 30799]
 const 类型 = ['散件', '精简', '无修', '橙武']
 
 const 装备速查 = () => {
@@ -44,7 +44,7 @@ const 装备速查 = () => {
         部位: Object.keys(装备数据)?.[0],
         品级范围: 英雄品,
         类型: 类型,
-      }
+      },
     )
   }, [])
 
@@ -80,7 +80,7 @@ const 装备速查 = () => {
     const maxEffect = Math.max(
       ...最终数据.map((item) => {
         return item.特效容量
-      })
+      }),
     )
 
     更新最大容量(maxEffect + maxAttr)
@@ -119,7 +119,7 @@ const 装备速查 = () => {
                   'zhuangbei-miaoshu-label',
                   a === '精简' ? 'zhuangbei-miaoshu-label-jingjian' : '',
                   // a === '特效' ? 'zhuangbei-miaoshu-label-texiao' : '',
-                  a === 'PVX' ? 'zhuangbei-miaoshu-label-pvx' : ''
+                  a === 'PVX' ? 'zhuangbei-miaoshu-label-pvx' : '',
                 )
 
                 return (
@@ -308,7 +308,7 @@ const 装备速查 = () => {
                           部位: Object.keys(装备数据)?.[0],
                           类型: 类型,
                           品级范围: 英雄品,
-                        }
+                        },
                       )
                     }}
                   >
@@ -327,7 +327,7 @@ const 装备速查 = () => {
                           部位: Object.keys(装备数据)?.[0],
                           类型: 类型,
                           品级范围: 普通品,
-                        }
+                        },
                       )
                     }}
                   >
@@ -346,7 +346,7 @@ const 装备速查 = () => {
                           部位: Object.keys(装备数据)?.[0],
                           类型: 类型,
                           品级范围: [],
-                        }
+                        },
                       )
                     }}
                   >
@@ -358,14 +358,14 @@ const 装备速查 = () => {
           >
             <Slider
               range
-              max={30700}
+              max={35900}
               min={16500}
               value={品级范围}
               step={500}
               marks={{
-                20500: '十人副本',
-                24500: '普通副本',
-                27800: '英雄副本',
+                27800: '十人副本',
+                30200: '普通副本',
+                35300: '英雄副本',
               }}
               // tooltip={{ open: true }}
               onChange={(e) => 设置品级范围(e)}

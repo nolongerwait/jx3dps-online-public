@@ -1,4 +1,5 @@
 export const attrSingleName = {
+  vitality_base: '体质',
   strength_base:'力道',
   agility_base:'身法',
   spunk_base:'元气',

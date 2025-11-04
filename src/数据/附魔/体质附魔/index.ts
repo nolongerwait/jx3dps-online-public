@@ -2,10 +2,10 @@ import { 属性类型 } from '@/@types/属性'
 import { 装备部位枚举 } from '@/@types/枚举'
 import { 附魔数据类型 } from '@/@types/附魔'
 
-const 附魔数组 = [889, 774, 444, 387]
+const 附魔数组 = [1037, 889, 774, 444, 387]
 
 // 按顺序位置索引
-const 附魔分数索引 = [2466, 2282, 1231, 1139]
+const 附魔分数索引 = [2877, 2466, 2282, 1231, 1139]
 
 export const 获取体质附魔数据 = (): 附魔数据类型[] => {
   return 附魔数组.map((item, index) => {

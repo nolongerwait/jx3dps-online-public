@@ -79,6 +79,12 @@ class 通用DOT类 extends 技能统一类 {
       const 披靡层数 = this.模拟循环?.当前自身buff列表?.['披靡·悟']?.当前层数
       快照buff列表.push(`披靡·悟·${披靡层数}`)
     }
+    if (this.模拟循环?.当前自身buff列表?.['横云一式']?.当前层数) {
+      快照buff列表.push(`横云一式`)
+    }
+    if (this.模拟循环?.当前自身buff列表?.['孤锋满锐']?.当前层数) {
+      快照buff列表.push(`孤锋满锐`)
+    }
 
     const 待生效数据: DOT待生效数据类型[] =
       this.DOT运行数据?.待生效数据.map((item) => {

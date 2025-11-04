@@ -71,6 +71,10 @@ export interface 循环数据 {
    * 目前包含：套装会心会效、大附魔_伤腰、水特效、风特效
    */
   快照计算?: 快照类型[]
+  /**
+   * @name 起手Buff配置
+   */
+  起手Buff配置?: any
 }
 
 export interface 循环详情 {

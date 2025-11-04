@@ -142,7 +142,7 @@ const 循环技能容器组件: React.FC<循环技能容器组件类型> = (prop
             <div className={`${styles.settingTurn}`} key={`${index}`}>
               <ReactSortable
                 list={轮次.map((i) =>
-                  Object.assign(i, { id: `${i?.技能名称}_${index}_${i?.index}` })
+                  Object.assign(i, { id: `${i?.技能名称}_${index}_${i?.index}` }),
                 )}
                 setList={(e) => {
                   拖拽更新循环(e, '轮次内')

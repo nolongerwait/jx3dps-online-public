@@ -86,6 +86,7 @@ function CycleSimulator() {
     循环执行结果: '成功',
     循环异常信息: {},
     技能基础数据: [...循环模拟技能基础数据],
+    当前DOT运行状态: {},
     技能释放记录: [],
     当前各技能运行状态: {},
     当前GCD组: {},
@@ -173,9 +174,7 @@ function CycleSimulator() {
       更新奇穴数据: 奇穴信息,
       更新秘籍信息: 秘籍信息,
     }
-    const { 秒伤, 计算结果技能列表, 秒伤计算时间, 总伤 } = dispatch(
-      秒伤计算(计算参数)
-    )
+    const { 秒伤, 计算结果技能列表, 秒伤计算时间, 总伤 } = dispatch(秒伤计算(计算参数))
     更新模拟DPS结果({
       秒伤: 战斗时间 > 0 ? 秒伤 : 0,
       总伤: 战斗时间 > 0 ? 总伤 : 0,
@@ -198,7 +197,7 @@ function CycleSimulator() {
         }
         const { 计算结果技能列表 } = dispatch(秒伤计算(计算参数))
         const 找到最终技能数据 = 计算结果技能列表?.find(
-          (a) => a?.技能名称 === 获取用于计算的技能组?.[0]?.技能名称
+          (a) => a?.技能名称 === 获取用于计算的技能组?.[0]?.技能名称,
         )
         if (找到最终技能数据) {
           技能伤害详情数据.push({
@@ -225,19 +224,13 @@ function CycleSimulator() {
     setCycle(newCycle)
   }
 
-  const 向循环内插入技能 = (
-    item: 循环基础技能数据类型[],
-    插入位置,
-    插入索引
-  ) => {
+  const 向循环内插入技能 = (item: 循环基础技能数据类型[], 插入位置, 插入索引) => {
     let newCycle: 循环基础技能数据类型[] = [...(cycle || [])]
     let addCycle: 循环基础技能数据类型[] = []
 
     if (插入位置 === '前部插入') {
       // 在索引 2 前插入多个元素
-      addCycle = newCycle
-        .slice(0, 插入索引)
-        .concat(item, newCycle.slice(插入索引))
+      addCycle = newCycle.slice(0, 插入索引).concat(item, newCycle.slice(插入索引))
       更新添加设置({ ...添加设置, 索引: 添加设置.索引 + item.length })
     } else {
       // 在索引 2 后插入多个元素
@@ -276,14 +269,9 @@ function CycleSimulator() {
       if (index === 0) {
         res[res?.length] = [{ ...data, index: index || 0 }]
       } else {
-        res[res?.length - 1] = [
-          ...(res[res?.length - 1] || []),
-          { ...data, index: index || 0 },
-        ]
+        res[res?.length - 1] = [...(res[res?.length - 1] || []), { ...data, index: index || 0 }]
 
-        const 换行 = 是否存在换行技能
-          ? data?.技能名称 === '换行'
-          : data?.技能名称 === '断'
+        const 换行 = 是否存在换行技能 ? data?.技能名称 === '换行' : data?.技能名称 === '断'
 
         if (换行) {
           res[res?.length] = []
@@ -328,7 +316,7 @@ function CycleSimulator() {
   return (
     <>
       <Modal
-        className="cycle-simulator-modal"
+        className='cycle-simulator-modal'
         maskClosable={false}
         width={'100%'}
         title={

@@ -7,9 +7,11 @@
  * 副本特效增益表现
  * 暂无更多等级
  */
-export const 获取副本特效增益表现 = (品级?: number) => {
-  return 1
-  console.info('品级', 品级)
+export const 获取副本特效增益表现 = (品级: number, 特效等级?: string | undefined) => {
+  if (特效等级) {
+    return +特效等级
+  }
+  return 品级 >= 33000 ? 2 : 1
 }
 
 /**
@@ -20,8 +22,13 @@ export const 试炼特效枚举 = [
   [24501, 25500], // 2
   [25501, 28100], // 3
   [28101, 32000], // 4
+  [32001, 35000], // 5 32500品
+  [35001, 36000], // 6 35300品
 ]
-export const 获取试炼之地增益表现 = (品级: number) => {
+export const 获取试炼之地增益表现 = (品级: number, 特效等级?: string | undefined) => {
+  if (特效等级) {
+    return +特效等级
+  }
   const 表现索引 = 试炼特效枚举?.findIndex((range) => 品级 >= range[0] && 品级 <= range[1])
   return (表现索引 || 0) + 1
 }
@@ -38,6 +45,8 @@ const 品级对应特效等级枚举 = {
   22000: 5,
   23650: 6,
   25300: 7,
+  27500: 8,
+  29700: 9,
 }
 export const 获取橙武特效等级表现 = (品级: number) => {
   return 品级对应特效等级枚举[品级]

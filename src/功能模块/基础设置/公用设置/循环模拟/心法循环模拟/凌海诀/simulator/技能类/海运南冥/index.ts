@@ -16,6 +16,7 @@ class 海运南冥 extends 有CD技能通用类 {
     this.海运南冥造成伤害()
     this.清源判定()
     this.澄穆判定()
+    this.引爆青冥('海运南冥')
     const 海碧判定通过 = this.海碧判定()
     if (海碧判定通过) {
       海运南冥.释放重置 = true

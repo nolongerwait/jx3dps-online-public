@@ -1,8 +1,9 @@
 // 当前角色状态栏，只用来展示
 import React from 'react'
 import { 当前计算结果类型 } from '@/@types/输出'
-import { 循环日志数据类型, ShowCycleSingleSkill, 模拟信息类型 } from '../../simulator/type'
+import { 循环日志数据类型, ShowCycleSingleSkill, 模拟信息类型, 角色状态信息类型 } from '../../simulator/type'
 
+import Energy from './energy'
 import Buff from './buff'
 import DpsRes from './dpsRes'
 import './index.css'
@@ -20,6 +21,7 @@ function StatusBar(props: StatusBarProps) {
 
   return (
     <div className={'cycle-status-bar'}>
+      <Energy 角色状态信息={模拟信息?.角色状态信息} />
       <Buff
         title='自身Buff'
         buff列表={模拟信息?.当前自身buff列表}

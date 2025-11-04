@@ -1,10 +1,11 @@
 import { map as 数据源 } from './equipment.mjs'
-import { attrMap as 装备属性枚举, 精简特效Map, 装备特效枚举, 装备类型枚举 } from './attrMap.mjs'
+import iconv from 'iconv-lite'
+import { attrMap as 装备属性枚举, 精简特效Map, 装备特效枚举, 装备类型枚举, 精简特效区分等级 } from './attrMap.mjs'
 import fs from 'fs'
-import path from 'path'
+// import path from 'path'
 // 导入本地装备数据
 
-const 赛季英雄普通区分品级 = 30200
+const 赛季英雄普通区分品级 = 35300
 const 导入最低品级 = 15500
 const 导入最高品级 = 99999
 
@@ -29,84 +30,100 @@ const 功法枚举 = {
 
 const 装备ID索引映射 = new Map()
 
+function 获取部位索引(部位, 部位门派分类) {
+  if (部位 === 'primary_weapon' && 部位门派分类 === '藏剑') {
+    return undefined
+  }
+  if (部位 === 'secondary_weapon' && 部位门派分类 === '藏剑') {
+    return '武器'
+  }
+  return 装备部位枚举[部位]
+}
+
 // 获取全部部位的数据
 async function 获取全部部位的数据(本次导入功法) {
   let 数据结果 = {}
   Object.keys(数据源).forEach((部位) => {
     const 该部位数据 = 数据源[部位]
-    const 部位索引 = 装备部位枚举[部位]
-    if (部位索引) {
-      Object.keys(该部位数据).forEach((装备名) => {
-        const 实际装备名 = 装备名?.split('#')?.[0]
-        const 装备数据 = 该部位数据[装备名]
-        const 符合功法 = 功法枚举[本次导入功法]?.includes(装备数据.kind)
-        const 装备品级 = 装备数据.level
-        if (符合功法 && 装备品级 >= 导入最低品级 && 装备品级 <= 导入最高品级) {
-          const 武器伤害对象 = {}
-          if (装备数据?.base?.weapon_damage_base) {
-            武器伤害对象.武器伤害_最小值 = 装备数据?.base?.weapon_damage_base
-            武器伤害对象.武器伤害_最大值 =
-              装备数据?.base?.weapon_damage_base + 装备数据?.base?.weapon_damage_rand
+    Object.keys(该部位数据).forEach((部位门派分类) => {
+      const 部位索引 = 获取部位索引(部位, 部位门派分类)
+      if (!部位索引) {
+        return
+      }
+      Object.keys(该部位数据[部位门派分类]).forEach((部位内外功分类) => {
+        Object.keys(该部位数据[部位门派分类][部位内外功分类]).forEach((装备名) => {
+          const 实际装备名 = 装备名?.split('#')?.[0]
+          const 装备数据 = 该部位数据[部位门派分类][部位内外功分类][装备名]
+          const 符合功法 = 功法枚举[本次导入功法]?.includes(装备数据.kind)
+          const 装备品级 = 装备数据.level
+          if (符合功法 && 装备品级 >= 导入最低品级 && 装备品级 <= 导入最高品级) {
+            const 武器伤害对象 = {}
+            if (装备数据?.base?.weapon_damage_base) {
+              武器伤害对象.武器伤害_最小值 = 装备数据?.base?.weapon_damage_base
+              武器伤害对象.武器伤害_最大值 =
+                装备数据?.base?.weapon_damage_base + 装备数据?.base?.weapon_damage_rand
+            }
+            const { 特效效果: 装备特效, 特效等级 } = 判断装备特效(装备数据, 部位索引, 装备名)
+            const 装备增益 = 获取增益(装备数据?.magic)
+            const 装备增益数据列表 = Object.keys(装备数据?.magic)
+            // const 装备来源对象 = 装备来源映射.get(
+            //   `${装备数据?.id}${装备数据?.level}`
+            // )
+            装备ID索引映射.set(`${装备数据?.id}_${装备数据?.level}`, true)
+            let 装备详情 = {
+              id: 装备数据?.id,
+              图标ID: 装备数据?.icon_id,
+              uid: 装备数据?.id,
+              装备名称: 实际装备名?.replace('_测试用', ''),
+              所属门派:
+                装备数据.school !== '通用' && 装备数据.school !== '精简' ? 装备数据.school : '通用',
+              装备主属性:
+                装备数据.kind === '内功' || 装备数据.kind === '外功' ? '通用' : 装备数据.kind,
+              装备品级: 装备数据.level,
+              ...(特效等级 ? {特效等级: 特效等级} : null),
+              ...武器伤害对象,
+              ...(装备特效 ? { 装备特效 } : null),
+              装备类型: 装备增益数据列表?.includes('pvx_round')
+                ? '装备类型枚举.PVX'
+                : 装备数据?.max_strength === 8
+                ? '装备类型枚举.橙武'
+                : 装备特效 === '装备特效枚举.大橙武特效'
+                ? '装备类型枚举.橙武'
+                : 装备特效?.includes('门派套装')
+                ? '装备类型枚举.门派套装'
+                : 装备特效?.includes('切糕')
+                ? '装备类型枚举.切糕'
+                : 装备特效?.includes('水特效') || 装备特效?.includes('龙门飞剑武器')
+                ? '装备类型枚举.特效武器'
+                : 装备特效?.includes('门派特效武器')
+                ? '装备类型枚举.门派特效武器'
+                : 装备特效?.includes('风特效')
+                ? '装备类型枚举.副本精简'
+                : 装备数据.school === '精简'
+                ? '装备类型枚举.副本精简'
+                : '装备类型枚举.普通',
+              装备增益: 装备增益,
+              镶嵌孔数组: 获取镶嵌(装备数据?.embed),
+            }
+            // if (装备来源对象?.装备来源) {
+            //   装备详情.装备来源 = 装备来源对象?.装备来源
+            // }
+            // if (装备特效 === '装备特效枚举.大橙武特效') {
+            //   装备详情.装备来源 = [{ 来源类型: '稀世神兵', 来源描述: '玄晶' }]
+            // } else if (实际装备名?.includes('无修')) {
+            //   装备详情.装备来源 = [{ 来源类型: '试炼', 来源描述: '试炼之地' }]
+            // } else if (实际装备名?.includes('寻踪觅宝')) {
+            //   装备详情.装备来源 = [{ 来源类型: '挖宝', 来源描述: '寻踪觅宝' }]
+            // }
+            if (数据结果[部位索引]) {
+              数据结果[部位索引].push(装备详情)
+            } else {
+              数据结果[部位索引] = [装备详情]
+            }
           }
-          const 装备特效 = 判断装备特效(装备数据, 部位索引, 装备名)
-          const 装备增益 = 获取增益(装备数据?.magic)
-          const 装备增益数据列表 = Object.keys(装备数据?.magic)
-          // const 装备来源对象 = 装备来源映射.get(
-          //   `${装备数据?.id}${装备数据?.level}`
-          // )
-          装备ID索引映射.set(`${装备数据?.id}_${装备数据?.level}`, true)
-          let 装备详情 = {
-            id: 装备数据?.id,
-            图标ID: 装备数据?.icon_id,
-            uid: 装备数据?.id,
-            装备名称: 实际装备名?.replace('_测试用', ''),
-            所属门派:
-              装备数据.school !== '通用' && 装备数据.school !== '精简' ? 装备数据.school : '通用',
-            装备主属性:
-              装备数据.kind === '内功' || 装备数据.kind === '外功' ? '通用' : 装备数据.kind,
-            装备品级: 装备数据.level,
-            ...武器伤害对象,
-            ...(装备特效 ? { 装备特效 } : null),
-            装备类型: 装备增益数据列表?.includes('pvx_round')
-              ? '装备类型枚举.PVX'
-              : 装备数据?.max_strength === 8
-              ? '装备类型枚举.橙武'
-              : 装备特效 === '装备特效枚举.大橙武特效'
-              ? '装备类型枚举.橙武'
-              : 装备特效?.includes('门派套装')
-              ? '装备类型枚举.门派套装'
-              : 装备特效?.includes('切糕')
-              ? '装备类型枚举.切糕'
-              : 装备特效?.includes('水特效') || 装备特效?.includes('龙门飞剑武器')
-              ? '装备类型枚举.特效武器'
-              : 装备特效?.includes('门派特效武器')
-              ? '装备类型枚举.门派特效武器'
-              : 装备特效?.includes('风特效')
-              ? '装备类型枚举.副本精简'
-              : 装备数据.school === '精简'
-              ? '装备类型枚举.副本精简'
-              : '装备类型枚举.普通',
-            装备增益: 装备增益,
-            镶嵌孔数组: 获取镶嵌(装备数据?.embed),
-          }
-          // if (装备来源对象?.装备来源) {
-          //   装备详情.装备来源 = 装备来源对象?.装备来源
-          // }
-          // if (装备特效 === '装备特效枚举.大橙武特效') {
-          //   装备详情.装备来源 = [{ 来源类型: '稀世神兵', 来源描述: '玄晶' }]
-          // } else if (实际装备名?.includes('无修')) {
-          //   装备详情.装备来源 = [{ 来源类型: '试炼', 来源描述: '试炼之地' }]
-          // } else if (实际装备名?.includes('寻踪觅宝')) {
-          //   装备详情.装备来源 = [{ 来源类型: '挖宝', 来源描述: '寻踪觅宝' }]
-          // }
-          if (数据结果[部位索引]) {
-            数据结果[部位索引].push(装备详情)
-          } else {
-            数据结果[部位索引] = [装备详情]
-          }
-        }
+        })
       })
-    }
+    })
   })
 
   Object.keys(数据结果).forEach((部位) => {
@@ -145,6 +162,7 @@ function 获取镶嵌(装备增益) {
 
 function 判断装备特效(装备数据, 部位索引, 装备名) {
   let 特效效果 = undefined
+  let 特效等级 = undefined
   // 大CW
   if (装备数据.max_strength === 8 && 部位索引 === '武器') {
     if (Object.keys(装备数据?.recipes)?.length && !Object.keys(装备数据?.gains)?.length) {
@@ -153,54 +171,54 @@ function 判断装备特效(装备数据, 部位索引, 装备名) {
       特效效果 = '装备特效枚举.大橙武特效'
     }
   }
+  else if (部位索引 === '武器' && 装备名.includes('特效') && !装备名?.includes('寻踪觅宝')) {
+    // 处理水特效和门派特效武器
+    if (装备数据?.gains?.length < 2) {
+      特效效果 = '装备特效枚举.水特效武器'
+    } else {
+      特效效果 = '装备特效枚举.门派特效武器'
+    }
+  }
+  else if (装备数据?.sets) {
+    if (装备数据?.sets?.['2']?.attributes?.all_critical_power_base && 装备数据?.sets?.['4']?.recipes) {
+      特效效果 = '装备特效枚举.门派套装'
+    }
+    else if (装备数据?.sets?.['2']?.attributes?.['all_critical_strike_base']) {
+      if (装备数据.level > 赛季英雄普通区分品级) {
+        特效效果 = '装备特效枚举.切糕_英雄'
+      } else {
+        特效效果 = '装备特效枚举.切糕_普通'
+      }
+    }
+    else if (装备数据?.sets?.['2']?.attributes?.['all_major_base']) {
+      特效效果 = '装备特效枚举.冬至套装'
+    }
+  }
+  if (装备数据?.gains && !特效效果) {
+    const 特效key = 装备数据?.gains?.[0]
+    if (特效key && 特效key?.includes('gain_')) {
+      Object.keys(精简特效Map).forEach((key) => {
+        if (特效key.includes(key)) {
+          特效效果 = `装备特效枚举.${精简特效Map[key]}`
+        }
+      })
+      if (特效效果) {
+        精简特效区分等级.forEach((key) => {
+          if (特效key.includes(key)) {
+            let 特效key数组 = 特效key?.split('_') || []
+            特效等级 = 特效key数组[特效key数组.length - 1]
+          }
+        })
+      }
+    }
+  }
   // 特效腰坠
-  if (部位索引 === '腰坠') {
+  if (部位索引 === '腰坠' && !特效效果) {
     if (装备名.includes('特效')) {
       特效效果 = '装备特效枚举.风特效腰坠'
     }
   }
-  if (装备数据?.set_attr) {
-    Object.keys(装备数据?.set_attr).forEach(() => {
-      if (装备数据?.set_attr?.['2']?.['all_critical_strike_base']) {
-        if (装备数据.level > 赛季英雄普通区分品级) {
-          特效效果 = '装备特效枚举.切糕_英雄'
-        } else {
-          特效效果 = '装备特效枚举.切糕_普通'
-        }
-      }
-      if (装备数据?.set_attr?.['2']?.['all_major_base']) {
-        特效效果 = '装备特效枚举.冬至套装'
-      }
-    })
-  }
-  if (装备数据?.set_recipe && !装备名?.includes('寻踪觅宝') && !装备名?.includes('陶然意')) {
-    if (装备数据?.set_gain?.['2'] || 装备数据?.set_gain?.['4']) {
-      特效效果 = '装备特效枚举.门派套装'
-    } else {
-      if (装备数据?.set_recipe?.['4'] && 装备数据?.set_attr?.['2']) {
-        特效效果 = '装备特效枚举.新门派套装'
-      }
-    }
-  }
-  if (装备数据?.gains) {
-    const 特效key = 装备数据?.gains?.[0]?.[0]
-    if (特效key) {
-      if (精简特效Map?.[特效key]) {
-        特效效果 = `装备特效枚举.${精简特效Map?.[特效key]}`
-      }
-    }
-  }
-  if (!特效效果) {
-    if (部位索引 === '武器' && 装备名.includes('特效') && !装备名?.includes('寻踪觅宝')) {
-      // 处理水特效和门派特效武器
-      if (装备数据?.gains?.length < 2) {
-        特效效果 = '装备特效枚举.水特效武器'
-      } else {
-        特效效果 = '装备特效枚举.门派特效武器'
-      }
-    }
-  }
-  return 特效效果
+  return { 特效效果, 特效等级 }
 }
 
 function 导出成文件(数据, 部位, 功法) {
@@ -241,6 +259,16 @@ function 导出成文件(数据, 部位, 功法) {
       }
       if (a.装备类型 !== '装备类型枚举.橙武' && b.装备类型 === '装备类型枚举.橙武') {
         return -1 // b 在前
+      }
+      return 0 // 保持原来的顺序
+    })
+  } else if (部位 === '腰坠') {
+    排序后数据.sort((a, b) => {
+      if (a.装备类型 === '装备类型枚举.橙武' && b.装备类型 !== '装备类型枚举.橙武') {
+        return -1 // a 在前
+      }
+      if (a.装备类型 !== '装备类型枚举.橙武' && b.装备类型 === '装备类型枚举.橙武') {
+        return 1 // b 在前
       }
       return 0 // 保持原来的顺序
     })
@@ -292,16 +320,16 @@ export default ${部位}装备数据
 // 初始化数据加载（建议服务启动时执行）
 function 生成装备来源映射() {
   try {
-    const __dirname = path.dirname(new URL(import.meta.url).pathname)
-    const filePath = path.join(__dirname, '../../../jx3_hd_src/ui/scheme/case/equipdb.txt')
+    // const __dirname = path.dirname(new URL(import.meta.url).pathname)
+    const filePath = ''
     if (!filePath) {
       throw new Error('equipdb.txt 文件路径未找到')
     }
-    const mapfilePath = path.join(__dirname, '../../../jx3_hd_src/settings/maplist.tab')
+    const mapfilePath = ''
     if (!mapfilePath) {
       throw new Error('mapfilePath.tab 文件路径未找到')
     }
-    const content = fs.readFileSync(filePath, 'utf-8')
+    const content = iconv.decode(fs.readFileSync(filePath), 'gbk')
     const lines = content.split('\n').filter((line) => line.trim())
 
     const headers = lines[0].split('\t')
@@ -311,7 +339,7 @@ function 生成装备来源映射() {
     const typeIndex = headers.indexOf('GetType')
     const mapIndex = headers.indexOf('BelongMapID')
 
-    const map_content = fs.readFileSync(mapfilePath, 'utf-8')
+    const map_content = iconv.decode(fs.readFileSync(mapfilePath), 'gbk')
     const map_lines = map_content.split('\n').filter((line) => line.trim())
     const map_headers = map_lines[0].split('\t')
     const map_idIndex = map_headers.indexOf('ID')
@@ -387,17 +415,23 @@ function 生成装备来源映射() {
 
     const obj = Object.fromEntries(装备来源映射)
 
-    fs.writeFile('装备来源映射.json', JSON.stringify(obj), (err) => {
+    // 写入装备来源映射
+    fs.writeFile('装备来源映射.json', JSON.stringify(obj, null, 2), 'utf8', (err) => {
       if (err) {
         console.info('err', err)
+      } else {
+        console.log('文件写入成功')
       }
     })
 
     const mapObj = Object.fromEntries(belongMapMap)
 
-    fs.writeFile('地图ID映射.json', JSON.stringify(mapObj), (err) => {
+    // 写入地图ID映射
+    fs.writeFile('地图ID映射.json', JSON.stringify(mapObj, null, 2), 'utf8', (err) => {
       if (err) {
         console.info('err', err)
+      } else {
+        console.log('文件写入成功')
       }
     })
 

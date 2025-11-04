@@ -1,6 +1,7 @@
 import { 属性简写枚举 } from '@/@types/枚举'
 import { 大附魔ID, 本赛季英雄品级 } from '@/数据/常量/装备常量'
 import 获取当前数据 from '@/数据/数据工具/获取当前数据'
+import { DaFuMoMap, EquipPositionMap, 五彩石转换 } from '../统一映射枚举'
 
 // 获取配装数据
 export const getEquipData = (data) => {
@@ -36,9 +37,7 @@ export const getEquipData = (data) => {
           未内置附魔列表.push(未支持附魔属性枚举[附魔属性] || 附魔属性)
           console.warn(`存在计算器未内置附魔${未支持附魔属性枚举[附魔属性]}`)
         } else {
-          const 附魔数据判断 = 附魔?.some(
-            (item) => item?.附魔名称 === `${附魔属性枚举}+${附魔值}`
-          )
+          const 附魔数据判断 = 附魔?.some((item) => item?.附魔名称 === `${附魔属性枚举}+${附魔值}`)
 
           if (!附魔数据判断) {
             未内置附魔列表.push(`${附魔属性枚举}${附魔值}`)
@@ -54,15 +53,9 @@ export const getEquipData = (data) => {
 
     if (装备部位) {
       const 装备位置映射 =
-        装备部位 === '戒指'
-          ? 已经计算过一个戒指
-            ? '_10'
-            : '_9'
-          : EquipPositionMap[装备部位]
+        装备部位 === '戒指' ? (已经计算过一个戒指 ? '_10' : '_9') : EquipPositionMap[装备部位]
 
-      const 装备原始数据 = 装备数据[装备部位]?.find(
-        (data) => +(data.id || 0) === +item.ID
-      )
+      const 装备原始数据 = 装备数据[装备部位]?.find((data) => +(data.id || 0) === +item.ID)
 
       if (装备原始数据) {
         equip[装备位置映射] = {
@@ -87,9 +80,7 @@ export const getEquipData = (data) => {
         if (item?.WCommonEnchant?.ID) {
           if (大附魔ID?.英雄?.some((a) => +item?.WCommonEnchant?.ID === +a)) {
             equip[DaFuMoMap[装备部位]] = 2
-          } else if (
-            大附魔ID?.普通?.some((a) => +item?.WCommonEnchant?.ID === +a)
-          ) {
+          } else if (大附魔ID?.普通?.some((a) => +item?.WCommonEnchant?.ID === +a)) {
             equip[DaFuMoMap[装备部位]] = 1
           } else {
             equip[DaFuMoMap[装备部位]] = 0
@@ -114,9 +105,7 @@ export const getEquipData = (data) => {
         }
 
         if (
-          !全部五彩石数据?.some(
-            (item) => item.五彩石名称 === 五彩石名称.replace('(伍)', '(陆)')
-          )
+          !全部五彩石数据?.some((item) => item.五彩石名称 === 五彩石名称.replace('(伍)', '(陆)'))
         ) {
           额外消息.push(`装备库未内置五彩石${item?.effectColorStone?.Name}`)
           五彩石名称 = ''
@@ -164,57 +153,6 @@ const 装备部位转化枚举 = {
   裤子: '下装',
   鞋: '鞋子',
   护臂: '护腕',
-}
-
-const DaFuMoMap = {
-  帽子: '大附魔_伤帽',
-  衣服: '大附魔_伤衣',
-  腰带: '大附魔_伤腰',
-  护腕: '大附魔_伤腕',
-  鞋子: '大附魔_伤鞋',
-}
-
-const EquipPositionMap = {
-  帽子: '_1',
-  衣服: '_2',
-  腰带: '_3',
-  护腕: '_4',
-  下装: '_5',
-  鞋子: '_6',
-  项链: '_7',
-  腰坠: '_8',
-  戒指: '_9',
-  戒指_2: '_10',
-  暗器: '_11',
-  武器: '_12',
-}
-
-export const 五彩石转换 = {
-  // 混元
-  融天: '星见', // 内功会心
-  霹雳: '月华', // 内功会效
-  雷鸣: '激流', // 内功攻击
-  混沌: '灭气', // 内功破防
-  // 阴性
-  化雪: '星见', // 内功会心
-  杯雪: '月华', // 内功会效
-  霜冷: '激流', // 内功攻击
-  冻髓: '灭气', // 内功破防
-  // 阳性
-  燎原: '星见', // 内功会心
-  浴火: '月华', // 内功会效
-  烈阳: '激流', // 内功攻击
-  日炎: '灭气', // 内功破防
-  // 阴阳
-  虹卷: '星见', // 内功会心
-  界影: '月华', // 内功会效
-  琉璃: '激流', // 内功攻击
-  焚虚: '灭气', // 内功破防
-  // 毒性
-  蚀骨: '星见', // 内功会心
-  穿石: '月华', // 内功会效
-  鹤顶: '激流', // 内功攻击
-  腐心: '灭气', // 内功破防
 }
 
 const 未支持附魔属性枚举 = {

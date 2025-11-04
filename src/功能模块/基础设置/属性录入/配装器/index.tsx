@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import html2canvas from 'html2canvas'
-import { Badge, Button, Form, message, Modal, ModalProps } from 'antd'
+import { Button, Form, message, Modal, ModalProps } from 'antd'
 import { 装备信息数据类型, 装备位置部位枚举, 装备选择范围类型 } from '@/@types/装备'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { 秒伤计算, 触发秒伤计算 } from '@/计算模块/计算函数'
@@ -52,7 +52,7 @@ function 配装器(props: ModalProps) {
 
   useEffect(() => {
     装备部位组件调用索引.current = Object.keys(装备位置部位枚举).map(
-      (_, i) => 装备部位组件调用索引.current[i] ?? React.createRef()
+      (_, i) => 装备部位组件调用索引.current[i] ?? React.createRef(),
     )
   }, [装备位置部位枚举])
 
@@ -106,7 +106,7 @@ function 配装器(props: ModalProps) {
     }
     Object.keys(装备位置部位枚举).map((item, index) => {
       const o = 装备信息.装备列表?.find(
-        (a, i) => a.装备部位 === 装备位置部位枚举[item] && index === i
+        (a, i) => a.装备部位 === 装备位置部位枚举[item] && index === i,
       )
       if (o) {
         newObj[`${item}`] = o
@@ -119,6 +119,7 @@ function 配装器(props: ModalProps) {
   const 更换装备计算秒伤 = (_, value) => {
     try {
       const 装备信息 = 根据表单选项获取装备信息(value)
+      console.log('装备信息', 装备信息)
       const { 秒伤 } = dispatch(秒伤计算({ 更新装备信息: 装备信息 }))
       设置配装器内动态新秒伤(秒伤)
       更新当前装备信息(装备信息)
@@ -251,18 +252,16 @@ function 配装器(props: ModalProps) {
           <配装起内切换循环 />
           <div>
             <Button onClick={一键截图}>配装截图</Button>
-            <Badge count='New' size='small' offset={[-10, -2]}>
-              <Button
-                danger
-                style={{ marginLeft: 12 }}
-                onClick={() => {
-                  数据埋点('打开配装导出弹窗')
-                  设置导出弹窗(true)
-                }}
-              >
-                配装导出
-              </Button>
-            </Badge>
+            <Button
+              danger
+              style={{ marginLeft: 12 }}
+              onClick={() => {
+                数据埋点('打开配装导出弹窗')
+                设置导出弹窗(true)
+              }}
+            >
+              配装导出
+            </Button>
             <Button
               id='Guide_2'
               style={{ marginLeft: 12 }}

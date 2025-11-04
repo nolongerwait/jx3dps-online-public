@@ -4,6 +4,7 @@ import { 循环基础技能数据类型, 模拟信息类型 } from '../../simula
 import AddCycleSkillBtn from './AddCycleSkillBtn'
 import { 快捷添加数据, 快捷添加数据类型 } from './快捷添加'
 import './index.css'
+import { 获取实际技能数据 } from '../../../通用/通用函数'
 
 interface AddCycleSkillBtnsProps {
   新增循环技能: (data: 循环基础技能数据类型) => void
@@ -13,16 +14,32 @@ interface AddCycleSkillBtnsProps {
   大橙武模拟: boolean
   开启武学助手?: boolean
   设置开启武学助手?: (e: boolean) => void
+  插入技能?: boolean // 插入技能时不禁用技能
 }
 
 function AddCycleSkillBtns(props: AddCycleSkillBtnsProps) {
-  const { 新增循环技能, 批量新增循环, 处理循环结果对象, 模拟信息, 开启武学助手, 设置开启武学助手 } =
-    props
+  const {
+    新增循环技能,
+    批量新增循环,
+    处理循环结果对象,
+    模拟信息,
+    开启武学助手,
+    设置开启武学助手,
+    插入技能,
+  } = props
 
   const 批量新增循环技能 = (数据: 快捷添加数据类型) => {
     const 技能原始数据: 循环基础技能数据类型[] = 数据?.技能序列
       .map((item) => {
-        return 模拟信息?.技能基础数据?.find((a) => a.技能名称 === item) || ({} as any)
+        const { 实际技能名称, 额外信息 } = 获取实际技能数据(item)
+        const 技能数据 =
+          模拟信息?.技能基础数据?.find((a) => a.技能名称 === 实际技能名称) || ({} as any)
+        return 技能数据
+          ? {
+              ...技能数据,
+              额外信息,
+            }
+          : null
       })
       .filter((item) => item)
     if (技能原始数据?.length) {
@@ -46,6 +63,7 @@ function AddCycleSkillBtns(props: AddCycleSkillBtnsProps) {
                   完整循环={处理循环结果对象?.完整循环 || []}
                   技能={item}
                   模拟信息={模拟信息}
+                  插入技能={插入技能}
                 />
               )
             })}
@@ -65,6 +83,7 @@ function AddCycleSkillBtns(props: AddCycleSkillBtnsProps) {
                   完整循环={处理循环结果对象?.完整循环 || []}
                   技能={item}
                   模拟信息={模拟信息}
+                  插入技能={插入技能}
                 />
               )
             })}
@@ -84,6 +103,29 @@ function AddCycleSkillBtns(props: AddCycleSkillBtnsProps) {
                   完整循环={处理循环结果对象?.完整循环 || []}
                   技能={item}
                   模拟信息={模拟信息}
+                  插入技能={插入技能}
+                />
+              )
+            })}
+        </Space>
+      </div>
+      <div className={'cycle-simulator-setting-item'}>
+        <span className={'daozong-cycle-btn-type'}>其他</span>
+        <Space className={'cycle-simulator-setting-skills'} size={[8, 16]} wrap>
+          {模拟信息?.技能基础数据
+            ?.filter((item) => {
+              return !item?.创建循环不可选 && item?.技能类型 === '其他'
+            })
+            .map((item) => {
+              return (
+                <AddCycleSkillBtn
+                  onClick={() => 新增循环技能(item)}
+                  key={item?.技能名称}
+                  className={'daozong-cycle-simulator-setting-btn'}
+                  完整循环={处理循环结果对象?.完整循环 || []}
+                  技能={item}
+                  模拟信息={模拟信息}
+                  插入技能={插入技能}
                 />
               )
             })}
